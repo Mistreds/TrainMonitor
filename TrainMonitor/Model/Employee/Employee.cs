@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace TrainMonitor.Model.Employee
             _birth_date = birthDate;
             _post_id = postId;
         }
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID_Employee
         {
@@ -181,6 +182,7 @@ namespace TrainMonitor.Model.Employee
     public class Department:BaseViewModel
     {
         private int _id_department;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID_Department
         {
@@ -212,6 +214,7 @@ namespace TrainMonitor.Model.Employee
     public class Post:BaseViewModel
     {
         private int _id_post;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID_Post
         {
@@ -283,6 +286,7 @@ namespace TrainMonitor.Model.Employee
     public class Brigade:BaseViewModel
     {
         private int _id_brigade;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id_Brigade
         {

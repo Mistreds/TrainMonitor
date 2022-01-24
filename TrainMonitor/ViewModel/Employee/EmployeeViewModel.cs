@@ -40,14 +40,26 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<Model.Employee.Employee> _employees;
+        public ObservableCollection<Model.Employee.Employee> Employees
+        {
+            get => _employees;
+            set
+            {
+                _employees = value;
+                OnPropertyChanged();
+            }
+        }
         public EmployeeViewModel()
         {
             Departments = MainViewModel.EmployeeModel.GetDepartments();
             DepartmentsCombo=MainViewModel.EmployeeModel.GetDepartmentsCombo();
             Posts = MainViewModel.EmployeeModel.GetDepartmentsPost();
+            Employees = MainViewModel.EmployeeModel.GetEmployee();
 
         }
         public ICommand UpdateDepart => new RelayCommand(() => {
+            MainViewModel.EmployeeModel.UpdateDepartment(Departments);
             Departments = MainViewModel.EmployeeModel.GetDepartments();
             DepartmentsCombo = MainViewModel.EmployeeModel.GetDepartmentsCombo();
         });
@@ -55,7 +67,9 @@ namespace TrainMonitor.ViewModel.Employee
             Departments = MainViewModel.EmployeeModel.GetDepartments();
             DepartmentsCombo = MainViewModel.EmployeeModel.GetDepartmentsCombo();
         });
-        public ICommand UpdatePost => new RelayCommand(() => { Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
+        public ICommand UpdatePost => new RelayCommand(() => {
+            MainViewModel.EmployeeModel.UpdatePost(Posts);
+            Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
         public ICommand CanselPost => new RelayCommand(() => { Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
     }
 }

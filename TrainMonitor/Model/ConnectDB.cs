@@ -34,10 +34,10 @@ namespace TrainMonitor.Model
             modelBuilder.Entity<Employee.Department>(b => b.ToTable("department"));
             modelBuilder.Entity<Employee.Department>().HasData(new Employee.Department[]
             {
-                new Employee.Department(-1,"Пусто"),new Employee.Department(1,"Администратор")
+                new Employee.Department(1,"Пусто"),new Employee.Department(2,"Администратор")
             });
             modelBuilder.Entity<Employee.Post>(b => b.ToTable("post"));
-            modelBuilder.Entity<Employee.Post>().HasData(new Employee.Post[] {new Employee.Post(-1, "Пусто", 0, -1), new Employee.Post(1, "Администратор", 0, 1)});
+            modelBuilder.Entity<Employee.Post>().HasData(new Employee.Post[] {new Employee.Post(1, "Пусто", 0, 1), new Employee.Post(2, "Администратор", 0, 2)});
             modelBuilder.Entity<Employee.Employee>(b => b.ToTable("employee"));
             modelBuilder.Entity<Employee.Employee>().Property(p => p.BrigadeId).HasDefaultValue(1);
             modelBuilder.Entity<Employee.Employee>().HasData(new Employee.Employee(1, "Admin", "mistred24@yandex.ru", "Admin", "Admin","Admin","Admin" , "0000" , "000000", DateTime.Parse("24.04.1997"), 1));
