@@ -1,0 +1,107 @@
+﻿<Window x:Class="TrainMonitor.View.Autorization.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TrainMonitor"
+        xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        mc:Ignorable="d"
+                      xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel.Autorization"
+               d:DataContext="{d:DesignInstance Type=ViewModel:RegistrationViewModel}"
+        Title="Registration" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+            <Setter Property="wpf:HintAssist.IsFloating" Value="False"></Setter>
+            <Setter Property="Height" Value="35"></Setter>
+            <Setter Property="Padding" Value="10,7,0,7" ></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition>
+                <RowDefinition.Style>
+                    <Style TargetType="RowDefinition">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSendCode}" Value="false">
+                                <Setter Property="Height" Value="0"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </RowDefinition.Style>
+            </RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Введите дату рождения">
+            </TextBlock>
+            <DatePicker SelectedDate="{Binding AddEmployee.Birth_Date}" wpf:HintAssist.Hint="27.05.2003"    Padding="10,7,0,7" Height="35"  wpf:HintAssist.IsFloating="False" Style="{StaticResource MaterialDesignOutlinedDatePicker}"></DatePicker>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Ввелите Фамилию"></TextBlock>
+            <TextBox  Text="{Binding AddEmployee.Surname}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванов"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <TextBlock Text="Введите Имя"></TextBlock>
+            <TextBox  Text="{Binding AddEmployee.Name}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иван"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <TextBlock Text="Введите Отчество"></TextBlock>
+            <TextBox Text="{Binding AddEmployee.Patronymic}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванович"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="1">
+            <TextBlock Text="Введите серию паспорта"></TextBlock>
+            <TextBox Text="{Binding AddEmployee.Passport_Series}"      Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="29 18"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <TextBlock Text="Придумайте  адрес электронной почты"></TextBlock>
+            <TextBox  Text="{Binding AddEmployee.Email}"     Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="E-mail"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="3">
+            <TextBlock Text="Придумайте логин"></TextBlock>
+            <TextBox   Text="{Binding AddEmployee.Login}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Логин"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="3">
+            <TextBlock Text="Придумайте пароль"></TextBlock>
+            <PasswordBox PasswordChar="*" x:Name="password1"   Style="{StaticResource MaterialDesignOutlinedPasswordBox}"    wpf:HintAssist.IsFloating="False"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="*******"   ></PasswordBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="3">
+            <TextBlock Text="Повторите пароль"></TextBlock>
+            <PasswordBox  PasswordChar="*" x:Name="password2" Style="{StaticResource MaterialDesignOutlinedPasswordBox}"    wpf:HintAssist.IsFloating="False"  Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="*******"   ></PasswordBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="3">
+            <TextBlock Text="Введите номер паспорта"></TextBlock>
+            <TextBox  Text="{Binding  AddEmployee.Passport_Number}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="903 132"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+            <TextBlock Text="Мы отправили вам код на почту"></TextBlock>
+            <TextBox  Text="{Binding Code}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Введите код подтверждения"></TextBox>
+        </StackPanel>
+        <Button Grid.Column="1" Grid.Row="7"  Grid.ColumnSpan="3" Width="200"  Command="{Binding Registration}" BorderBrush="Black" Foreground="Black" >
+            <Button.Style>
+                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+                    <Setter Property="Content" Value="Отправить код">
+                        
+                    </Setter>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsSendCode}" Value="True">
+                            <Setter Property="Content" Value="Зарегистрироватся"> </Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+    </Grid>
+</Window>
