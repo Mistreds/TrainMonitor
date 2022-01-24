@@ -54,7 +54,7 @@
                 </Grid>
                 <Expander Header="Глава отдела кадров">
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Сотрудники"></Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Сотрудники" Command="{Binding OpenPageCommand}" CommandParameter="Employee"></Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Отдел" Command="{Binding OpenPageCommand}" CommandParameter="Department"></Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Должность" Command="{Binding OpenPageCommand}" CommandParameter="Post"></Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада"></Button>

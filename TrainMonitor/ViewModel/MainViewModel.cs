@@ -29,7 +29,7 @@ namespace TrainMonitor.ViewModel
         {
             EmployeeModel=new Model.Employee.EmployeeModel();
             EmployeeViewModel = new Employee.EmployeeViewModel();   
-            PagesControl = new Dictionary<string, Page> { { "Department", new View.Employee.Department(EmployeeViewModel) }, {"Post", new View.Employee.Post(EmployeeViewModel) } };
+            PagesControl = new Dictionary<string, Page> { { "Department", new View.Employee.Department(EmployeeViewModel) }, { "Post", new View.Employee.Post(EmployeeViewModel) }, {"Employee",  new View.Employee.Employee(EmployeeViewModel) } };
         }
         public ICommand   OpenPageCommand => new DelegateCommand<string>(OpenPage);
         private void OpenPage(string page)

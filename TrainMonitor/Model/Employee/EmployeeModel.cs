@@ -33,7 +33,19 @@ namespace TrainMonitor.Model.Employee
         public ObservableCollection<Model.Employee.Employee> GetEmployee()
         {
             var db = new ConnectDB();
-            return new ObservableCollection<Employee>(db.Employee.Where(p => p.ID_Employee != 1));
+            return new ObservableCollection<Employee>(db.Employee.Include(p=>p.Brigade).Include(p=>p.Post));
+        }
+        public ObservableCollection<Model.Employee.Brigade> GetBrigades()
+        {
+            var db = new ConnectDB();
+            return new ObservableCollection<Brigade>(db.Brigade.Where(p=>p.Id_Brigade!=1));
+
+        }
+        public ObservableCollection<Model.Employee.Brigade> GetBrigadesCombo()
+        {
+            var db = new ConnectDB();
+            return new ObservableCollection<Brigade>(db.Brigade);
+
         }
         public void UpdateDepartment(ObservableCollection<Department> departments)
         {

@@ -24,7 +24,8 @@ namespace TrainMonitor.Model
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=train_monitor;Username=postgres;Password=kbwtq540");
+            //Тут необходимао прописать настройки postgres, где database желаемое название (база создается автоматически при первом запуске) и password соотвественно пароль
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=;Username=postgres;Password=");
 
         }
 

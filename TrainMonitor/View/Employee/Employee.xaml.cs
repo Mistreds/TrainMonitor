@@ -20,9 +20,10 @@ namespace TrainMonitor.View.Employee
     /// </summary>
     public partial class Employee : Page
     {
-        public Employee()
+        public Employee(ViewModel.Employee.EmployeeViewModel employeeViewModel)
         {
             InitializeComponent();
+            DataContext = employeeViewModel;
         }
     }
 }

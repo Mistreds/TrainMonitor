@@ -40,6 +40,16 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<Model.Employee.Post> _posts_combo;
+        public ObservableCollection<Model.Employee.Post> PostsCombo
+        {
+            get => _posts_combo;
+            set
+            {
+                _posts_combo = value;
+                OnPropertyChanged();
+            }
+        }
         private ObservableCollection<Model.Employee.Employee> _employees;
         public ObservableCollection<Model.Employee.Employee> Employees
         {
@@ -50,12 +60,35 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<Model.Employee.Brigade> _brigades;
+        public ObservableCollection<Model.Employee.Brigade> Brigades
+        {
+            get => _brigades;
+            set
+            {
+                _brigades = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<Model.Employee.Brigade> _brigades_combo;
+        public ObservableCollection<Model.Employee.Brigade> BrigadesCombo
+        {
+            get => _brigades_combo;
+            set
+            {
+                _brigades_combo = value;
+                OnPropertyChanged();
+            }
+        }
         public EmployeeViewModel()
         {
             Departments = MainViewModel.EmployeeModel.GetDepartments();
             DepartmentsCombo=MainViewModel.EmployeeModel.GetDepartmentsCombo();
             Posts = MainViewModel.EmployeeModel.GetDepartmentsPost();
+            PostsCombo=MainViewModel.EmployeeModel.GetDepartmentsPostCombo();
             Employees = MainViewModel.EmployeeModel.GetEmployee();
+            Brigades = MainViewModel.EmployeeModel.GetBrigades();
+            BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
 
         }
         public ICommand UpdateDepart => new RelayCommand(() => {
