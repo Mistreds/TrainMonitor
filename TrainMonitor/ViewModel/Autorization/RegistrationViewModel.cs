@@ -87,7 +87,7 @@ namespace TrainMonitor.ViewModel.Autorization
                 if (pass == null)
                     return;
                 AddEmployee.Password = pass;
-                AddEmployee.PostId = -1;
+                AddEmployee.PostId = 1;
                 AddEmployee.ID_Employee = 0;
                 using (var db = new Model.ConnectDB())
                 {
@@ -100,7 +100,7 @@ namespace TrainMonitor.ViewModel.Autorization
             }
            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message +" " + ex.StackTrace);
             }
 
 

@@ -17,8 +17,8 @@ namespace TrainMonitor.Model.Employee
             int value = rnd.Next(100000, 999999);
             try
             {
-
-                MailAddress from = new MailAddress("spiridonov24@list.ru", "Test");
+                //тут пишется email и имя отправителя
+                MailAddress from = new MailAddress("", "");
                 // кому отправляем
                 MailAddress to = new MailAddress(email);
                 // создаем объект сообщения
@@ -33,7 +33,8 @@ namespace TrainMonitor.Model.Employee
                 SmtpClient smtp = new SmtpClient("smtp.mail.ru", 587);
                 // логин и пароль
                 smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential("spiridonov24@list.ru", "Q9PbPLzvwanN6QnQCz34");
+                //тут логин и пароль, сейчас настроео чере mail.ru, а там лучше всего сделать для внешний служб отдельный пароль
+                smtp.Credentials = new NetworkCredential("", "");
                 smtp.EnableSsl = true;
                 smtp.Send(m);
             }

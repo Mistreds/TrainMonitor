@@ -15,9 +15,9 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding Departments}" AutoGenerateColumns="False" >
+        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding Brigades}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Width="1*" Header="Наименование отдела" Binding="{Binding DepartmentName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="Наименование бригады" Binding="{Binding BrigadeName}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">
@@ -28,8 +28,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
-            <Button Grid.Column="3" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
+            <Button Grid.Column="1" Command="{Binding UpdateBrigade}" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
+            <Button Grid.Column="3"  Command="{Binding CanselBrigade}" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
         </Grid>
     </Grid>
 </Page>

@@ -57,7 +57,7 @@
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Сотрудники" Command="{Binding OpenPageCommand}" CommandParameter="Employee"></Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Отдел" Command="{Binding OpenPageCommand}" CommandParameter="Department"></Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Должность" Command="{Binding OpenPageCommand}" CommandParameter="Post"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада"></Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Медицинские осмотры"></Button>
                     </StackPanel>
                 </Expander>

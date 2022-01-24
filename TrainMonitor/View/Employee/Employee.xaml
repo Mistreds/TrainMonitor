@@ -69,8 +69,8 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
-            <Button Grid.Column="3" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
+            <Button Grid.Column="1" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding UpdateEmployee}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
+            <Button Grid.Column="3" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding CanselEmployee}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
         </Grid>
     </Grid>
 </Page>

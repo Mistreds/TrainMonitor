@@ -47,6 +47,23 @@ namespace TrainMonitor.Model.Employee
             return new ObservableCollection<Brigade>(db.Brigade);
 
         }
+        public void UpdateBrigade(ObservableCollection<Model.Employee.Brigade> brigades)
+        {
+            var db = new ConnectDB();
+            db.Brigade.UpdateRange(brigades);
+            db.SaveChanges();
+        }
+        public void UpdateEmployee(ObservableCollection<Employee> employee)
+        {
+            var db=new ConnectDB();
+            foreach(var emp in employee)
+            {
+                emp.Post = null;
+                emp.Brigade = null;
+            }
+            db.Employee.UpdateRange(employee);
+            db.SaveChanges();
+        }
         public void UpdateDepartment(ObservableCollection<Department> departments)
         {
             var db = new ConnectDB();

@@ -104,5 +104,20 @@ namespace TrainMonitor.ViewModel.Employee
             MainViewModel.EmployeeModel.UpdatePost(Posts);
             Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
         public ICommand CanselPost => new RelayCommand(() => { Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
+        public ICommand UpdateEmployee => new RelayCommand(() => { MainViewModel.EmployeeModel.UpdateEmployee(Employees);
+            Employees = MainViewModel.EmployeeModel.GetEmployee();
+        });
+        public ICommand CanselEmployee => new RelayCommand(() => {
+            Employees = MainViewModel.EmployeeModel.GetEmployee();
+        });
+        public ICommand UpdateBrigade => new RelayCommand(() => {
+            MainViewModel.EmployeeModel.UpdateBrigade(Brigades);
+            Brigades = MainViewModel.EmployeeModel.GetBrigades();
+            BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
+        });
+        public ICommand CanselBrigade => new RelayCommand(() => {
+            Brigades = MainViewModel.EmployeeModel.GetBrigades();
+            BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
+        });
     }
 }
