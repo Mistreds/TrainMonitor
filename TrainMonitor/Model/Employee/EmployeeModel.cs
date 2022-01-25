@@ -10,6 +10,7 @@ namespace TrainMonitor.Model.Employee
 {
     public class EmployeeModel
     {
+        //тут получение данных из базы данный посредством linq и ef core
         public ObservableCollection<Model.Employee.Department> GetDepartments()
         {
             var db = new ConnectDB();
@@ -23,6 +24,7 @@ namespace TrainMonitor.Model.Employee
         public ObservableCollection<Model.Employee.Post> GetDepartmentsPost()
         {
             var db = new ConnectDB();
+            //include в ef core это получение данных при помощи вторичного ключа, например в таблице с должностью есть ключ DepartmentId, и мы в обьект Post загружаем так же "подобьект" Department, думаю понятно объяснил, в остальных моделях по аналогии
             return new ObservableCollection<Post>(db.Post.Include(p => p.Department).Include(p=>p.Role).Where(p=>p.ID_Post!=1));
         }
         public ObservableCollection<Model.Employee.Post> GetDepartmentsPostCombo()
@@ -58,17 +60,12 @@ namespace TrainMonitor.Model.Employee
             var db=new ConnectDB();
             return new ObservableCollection<MedicalExamination>(db.MedicalExamination.Include(p => p.Employee));
         }
-        public void UpdateBrigade(ObservableCollection<Model.Employee.Brigade> brigades)
+        //тут обновленние данных в коллеции
+        public void UpdateBrigade(ObservableCollection<Model.Employee.Brigade> brigades)//обновление бригады
         {
             var db = new ConnectDB();
-            foreach (var item in brigades)
-            {
-                if(item.ID_Brigade<1)
-                {
-                    item.ID_Brigade = 0;
-                }
-            }
             db.Brigade.UpdateRange(brigades);
+            db.Brigade.RemoveRange(db.Brigade.Where(p => !brigades.Select(s => s.ID_Brigade).Contains(p.ID_Brigade)));
             db.SaveChanges();
         }
         public void UpdateEmployee(ObservableCollection<Employee> employee)
@@ -76,19 +73,22 @@ namespace TrainMonitor.Model.Employee
             var db=new ConnectDB();
             foreach(var emp in employee)
             {
+                //employee post это список должностей пользователя
                 foreach(var post in emp.EmployeePost)
                 {
-                    post.Post = null;
+                    post.Post = null;//необходимо присвоить в employeepost переменной post null, потому что ef core будет пытатся добавить его в бд, и будет выскакивать исключение, что повторяющийся ключ
                 }
-                if (!emp.Valid_Phone)
+                if (!emp.Valid_Phone)//если телефон не правильного формата то оставляет его пустым
                     emp.Phone = string.Empty;
-                emp.Brigade = null; 
-                if (emp.ID_Employee == 0 || emp.ID_Employee==1)
+                emp.Brigade = null; //аналогично с employee post
+                if (emp.ID_Employee==1)//это чтобы не удалили случайно права администратору
                     continue;
-                db.RemoveRange(db.EmployeePost.Where(p => !emp.EmployeePost.Select(s => s.ID_EmployeePost).Contains(p.ID_EmployeePost) && p.EmployeeId==emp.ID_Employee));
+                db.RemoveRange(db.EmployeePost.Where(p => !emp.EmployeePost.Select(s => s.ID_EmployeePost).Contains(p.ID_EmployeePost) && p.EmployeeId==emp.ID_Employee));//удаление должностей, которые мы вручную удалили из коллекции через del
                 
             }
+            //Обновление пользоватей
             db.Employee.UpdateRange(employee);
+            //Удаление пользоватей
             db.RemoveRange(db.Employee.Where(p => !employee.Select(s => s.ID_Employee).Contains(p.ID_Employee) && p.ID_Employee!=1));
             db.SaveChanges();
         }

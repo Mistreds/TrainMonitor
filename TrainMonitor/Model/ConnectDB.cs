@@ -13,6 +13,7 @@ namespace TrainMonitor.Model
     public class ConnectDB : DbContext
     {
 
+        //Тут идет обьявление обьект базы данных, чтобы можно было сделать из них выборку
         public DbSet<Employee.Employee> Employee { get; set; }
         public DbSet<Employee.Department> Department { get; set; }
         public DbSet<Employee.Post> Post { get; set; }
@@ -38,6 +39,7 @@ namespace TrainMonitor.Model
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //Про Entity Framework Core лучше всего почитать вот тут https://metanit.com/sharp/efcore/1.1.php
             //Тут необходимао прописать настройки postgres, где database желаемое название (база создается автоматически при первом запуске) и password соотвественно пароль
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=train_monitor;Username=postgres;Password=");
 
@@ -45,18 +47,19 @@ namespace TrainMonitor.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.UseSerialColumns();
+            modelBuilder.UseSerialColumns();//Возможность использование автоинкремента в базе
             #region  Employee
             #region Department
-            modelBuilder.Entity<Employee.Department>(b => b.ToTable("department"));
-            modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).UseIdentityAlwaysColumn();
-            modelBuilder.Entity<Employee.Department>().HasData(new Employee.Department[]
+            modelBuilder.Entity<Employee.Department>(b => b.ToTable("department"));//инициализация объекта Department в базе с названием таблицы
+            modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).UseIdentityAlwaysColumn();//использование автонкремента на соотвествующем столбе
+            modelBuilder.Entity<Employee.Department>().HasData(new Employee.Department[] //инициализация первичных данных, срабатывает один раз при создании БД
             {
                 new Employee.Department(1,"Администратор")
             });
 
-            modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).HasIdentityOptions(startValue: 2);
+            modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).HasIdentityOptions(startValue: 2);//начинать автоинкремент с идентификатора 2, если его не будет, то при первом добавлении данных в таблицу будет выскакивать исключение, что такой id в базе уже есть есть
             #endregion
+            //Дальше все идет абсолютно одинаково, где первичных данных нет, HasIdentityOptions(startValue: 2); не нуден
             modelBuilder.Entity<Employee.Role>(b => b.ToTable("role"));
             modelBuilder.Entity<Employee.Role>().HasData(new Role[] { new Role(1, "Администратор"), new Role(2, "Глава отдела кадров"), new Role(3, "Графист"), new Role(4, "Продавец"), new Role(5, "Диспетчер поезда"), new Role(6, "Главный механик") });
             #region Post

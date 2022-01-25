@@ -28,7 +28,7 @@ namespace TrainMonitor.Model.Employee
             
         }
        
-        [Key]
+        [Key]// инициализация первичного ключа
         public int ID_Employee
         {
             get => _id_employee;
@@ -111,7 +111,7 @@ namespace TrainMonitor.Model.Employee
 
         }
             private string _passport_number;
-        [MinLength(4),MaxLength(6)]
+        [MinLength(6),MaxLength(6)]//длина строки в базе
         public string Passport_Number
         {
             get => _passport_number;
@@ -138,7 +138,7 @@ namespace TrainMonitor.Model.Employee
             set
             {
                 _phone = value;
-                Regex _Phone = new Regex(@"((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}");
+                Regex _Phone = new Regex(@"((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}");//регулярное выражение для телефона
                 Valid_Phone=_Phone.IsMatch(value);
                 if(string.IsNullOrEmpty(value))
                 {
@@ -149,7 +149,7 @@ namespace TrainMonitor.Model.Employee
         }
         
         private bool valid_phone;
-        [NotMapped]
+        [NotMapped]//не создавать таблицу в бд
         public bool Valid_Phone
         {
             get => valid_phone;
@@ -165,6 +165,7 @@ namespace TrainMonitor.Model.Employee
             get
             {
                 var db=new Model.ConnectDB();
+                //загрузить из базы дату последнего осмотра
                 var med = db.MedicalExamination.Where(p => p.EmployeeId == ID_Employee).OrderByDescending(p => p.ExaminationDate).FirstOrDefault();
                 if (med != null)
                     return med.ExaminationDate.ToString("dd.MM.yyyy");
