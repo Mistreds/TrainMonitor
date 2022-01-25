@@ -9,7 +9,24 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Grey.xaml" />
+             
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="TextBlock" >
+                <Setter Property="Foreground" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="TimesNewRoman"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
+            </Style>
+            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                <Setter Property="Foreground" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="TimesNewRoman"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
+            </Style>
+            <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                <Setter Property="Foreground" Value="Black"></Setter>
+                <Setter Property="FontFamily" Value="TimesNewRoman"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
+            </Style>
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

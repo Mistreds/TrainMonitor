@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,13 +26,13 @@ namespace TrainMonitor.ViewModel.Autorization
         {
             using (var db=new Model.ConnectDB())
             {
-                var emp = db.Employee.Where(p => p.Login == login && p.Password == password).FirstOrDefault();
+                var emp = db.Employee.Where(p => p.Login == login && p.Password == password).Include(p=>p.EmployeePost).ThenInclude(p=>p.Post).FirstOrDefault();
                 if(emp==null)
                 {
                     MessageBox.Show("Введеный логин или пароль неверны","Ошибка");
                     return;
                 }
-                MainWindow mainWindow= new MainWindow();
+                MainWindow mainWindow= new MainWindow(emp);
                 mainWindow.Show();
                 Autorization.Close();
             }

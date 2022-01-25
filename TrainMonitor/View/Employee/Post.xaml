@@ -32,6 +32,18 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Роль" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Role.RoleName,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValuePath="ID_Role" DisplayMemberPath="RoleName" SelectedValue="{Binding  RoleId}" SelectedItem="{Binding  Role,UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=DataContext.Roles,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">

@@ -18,6 +18,8 @@ namespace TrainMonitor.Model
         public DbSet<Employee.Post> Post { get; set; }
         public  DbSet<Employee.Brigade> Brigade { get; set; }
         public DbSet<Employee.MedicalExamination> MedicalExamination { get; set; }
+        public DbSet<Employee.Role> Role { get; set; }
+        public DbSet<Employee.EmployeePost> EmployeePost { get; set; }
         public  DbSet<Train.Train> Train { get; set; }
         public DbSet<Train.Train_Maintance> TrainMaintance { get; set; }
         public DbSet<TrainWorkType> TrainWorkTypes { get; set; }
@@ -26,9 +28,10 @@ namespace TrainMonitor.Model
         public DbSet<Route.Route> Route { get; set; }
         public DbSet<Schedule.Schedule> Schedule { get; set; }
         public DbSet<Ticket.Ticket> Ticket { get; set; }
+
         public ConnectDB()
         {
-         //  Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
             //Database.Migrate();
 
@@ -36,7 +39,7 @@ namespace TrainMonitor.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Тут необходимао прописать настройки postgres, где database желаемое название (база создается автоматически при первом запуске) и password соотвественно пароль
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=train_monitor;Username=postgres;Password=");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=train_monitor;Username=postgres;Password=kbwtq540");
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,33 +47,44 @@ namespace TrainMonitor.Model
             base.OnModelCreating(modelBuilder);
             modelBuilder.UseSerialColumns();
             #region  Employee
-            modelBuilder.Entity<Employee.Department>(b => b.ToTable("department")); 
+            #region Department
+            modelBuilder.Entity<Employee.Department>(b => b.ToTable("department"));
             modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).UseIdentityAlwaysColumn();
             modelBuilder.Entity<Employee.Department>().HasData(new Employee.Department[]
             {
-                new Employee.Department(1,"Пусто"),new Employee.Department(2,"Администратор")
+                new Employee.Department(1,"Администратор")
             });
-            
-            modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).HasIdentityOptions(startValue: 3);
 
-            modelBuilder.Entity<Employee.Post>(b => b.ToTable("post")); 
+            modelBuilder.Entity<Employee.Department>().Property(f => f.ID_Department).HasIdentityOptions(startValue: 2);
+            #endregion
+            modelBuilder.Entity<Employee.Role>(b => b.ToTable("role"));
+            modelBuilder.Entity<Employee.Role>().HasData(new Role[] { new Role(1, "Администратор"), new Role(2, "Глава отдела кадров"), new Role(3, "Графист"), new Role(4, "Продавец"), new Role(5, "Диспетчер поезда"), new Role(6, "Главный механик") });
+            #region Post
+            modelBuilder.Entity<Employee.Post>(b => b.ToTable("post"));
             modelBuilder.Entity<Employee.Post>().Property(f => f.ID_Post).UseIdentityAlwaysColumn();
-            modelBuilder.Entity<Employee.Post>().HasData(new Employee.Post[] {new Employee.Post(1, "Пусто", 0, 1), new Employee.Post(2, "Администратор", 0, 2)});
-           
-            modelBuilder.Entity<Employee.Post>().Property(f => f.ID_Post).HasIdentityOptions(startValue:3);
-
+            modelBuilder.Entity<Employee.Post>().HasData(new Employee.Post[] { new Employee.Post(1, "Администратор", 0, 1, 1) });
+            modelBuilder.Entity<Employee.Post>().Property(f => f.ID_Post).HasIdentityOptions(startValue: 2);
+            #endregion
+            #region Brigade
             modelBuilder.Entity<Employee.Brigade>(b => b.ToTable("brigade"));
-            modelBuilder.Entity<Employee.Brigade>().Property(f => f.ID_Brigade).UseIdentityAlwaysColumn();       
+            modelBuilder.Entity<Employee.Brigade>().Property(f => f.ID_Brigade).UseIdentityAlwaysColumn();
             modelBuilder.Entity<Employee.Brigade>().HasData(new Brigade(1, "Пусто"));
             modelBuilder.Entity<Employee.Brigade>().Property(f => f.ID_Brigade).HasIdentityOptions(startValue: 2);
-
+            #endregion
             modelBuilder.Entity<Employee.Employee>(b => b.ToTable("employee"));
-            modelBuilder.Entity<Employee.Employee>().Property(p => p.BrigadeId).HasDefaultValue(1); 
-
+            modelBuilder.Entity<Employee.Employee>().Property(p => p.BrigadeId).HasDefaultValue(1);
+            #region Employee
             modelBuilder.Entity<Employee.Employee>().Property(f => f.ID_Employee).UseIdentityAlwaysColumn();
             modelBuilder.Entity<Employee.Employee>().Property(f => f.ID_Employee).HasIdentityOptions(startValue: 2);
             //Где почта лучше замнить на любую свою почту
-            modelBuilder.Entity<Employee.Employee>().HasData(new Employee.Employee(1, "Admin", "Почта", "Admin", "Admin","Admin","Admin" , "0000" , "000000", DateTime.Parse("24.04.1997"), 2));
+            modelBuilder.Entity<Employee.Employee>().HasData(new Employee.Employee(1, "Admin", "Почта", "Admin", "Admin", "Admin", "Admin", "0000", "000000", DateTime.Parse("24.04.1997")));
+            #endregion
+            #region EmployeePost
+            modelBuilder.Entity<EmployeePost>(b => b.ToTable("empoyee_post"));
+            modelBuilder.Entity<EmployeePost>().HasData(new EmployeePost[] { new EmployeePost(1,1,1) });
+            modelBuilder.Entity<EmployeePost>().Property(f => f.ID_EmployeePost).UseIdentityAlwaysColumn();
+            modelBuilder.Entity<EmployeePost>().Property(f => f.ID_EmployeePost).HasIdentityOptions(startValue: 2);
+            #endregion
             modelBuilder.Entity<MedicalExamination>(b => b.ToTable("medical_examination"));
             #endregion
             #region Train

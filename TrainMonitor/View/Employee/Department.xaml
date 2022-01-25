@@ -17,7 +17,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding Departments}" AutoGenerateColumns="False" >
+        <DataGrid  ItemsSource="{Binding Departments}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Наименование отдела" Binding="{Binding DepartmentName}"></DataGridTextColumn>
             </DataGrid.Columns>

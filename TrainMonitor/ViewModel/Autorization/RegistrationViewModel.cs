@@ -86,11 +86,17 @@ namespace TrainMonitor.ViewModel.Autorization
             {
                 if (pass == null)
                     return;
+
                 AddEmployee.Password = pass;
-                AddEmployee.PostId = 1;
+              
                 AddEmployee.ID_Employee = 0;
                 using (var db = new Model.ConnectDB())
                 {
+                    if(db.Employee.Any(p=>p.Email==AddEmployee.Email || p.Login==AddEmployee.Login))
+                    {
+                        MessageBox.Show("Пользователь с таким Email или логином уже зарегистрирован", "Успех");
+                        return;
+                    }
                     db.Employee.Add(AddEmployee);
                     db.SaveChanges();
 

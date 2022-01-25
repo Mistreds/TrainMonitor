@@ -205,6 +205,9 @@
     <Compile Include="View\Employee\Employee.xaml.cs">
       <DependentUpon>Employee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Employee\MainUser.xaml.cs">
+      <DependentUpon>MainUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Employee\MedicalView.xaml.cs">
       <DependentUpon>MedicalView.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Employee\Employee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Employee\MainUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

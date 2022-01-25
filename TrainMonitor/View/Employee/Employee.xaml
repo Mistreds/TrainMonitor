@@ -16,15 +16,15 @@
         </Grid.RowDefinitions>
         <DataGrid CanUserDeleteRows="False" CanUserAddRows="False" ItemsSource="{Binding Employees}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Логин" Width="1*" Binding="{Binding Login}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Email" Width="1*" Binding="{Binding Email}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Телефон" Width="1*" Binding="{Binding Phone}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Фамилия" Width="1*" Binding="{Binding Surname}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Имя" Width="1*" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Отчество" Width="1*" Binding="{Binding  Patronymic}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Серия паспорта" Width="1*" Binding="{Binding Passport_Series}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Номер паспорта" Width="1*" Binding="{Binding Passport_Number}"></DataGridTextColumn>
-                <DataGridTemplateColumn Header="Дата рождения" Width="1*">
+                <DataGridTextColumn Header="Логин"  Binding="{Binding Login}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email"  Binding="{Binding Email}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Телефон"  Binding="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия"  Binding="{Binding Surname}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя"  Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding  Patronymic}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Серия паспорта"  Binding="{Binding Passport_Series}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Номер паспорта"  Binding="{Binding Passport_Number}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Дата рождения" >
                     <DataGridTemplateColumn.CellTemplate>
                    <DataTemplate>
                        <TextBlock Text="{Binding Birth_Date}"></TextBlock>
@@ -36,19 +36,34 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Должность" Width="1*">
+                <DataGridTemplateColumn Header="Должность" Width="150" x:Name="PostColumn" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Post.PostName,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <ListBox  ItemsSource="{Binding EmployeePost}" DisplayMemberPath="Post.PostName"></ListBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox SelectedValuePath="ID_Post" DisplayMemberPath="PostName" SelectedValue="{Binding PostId}" SelectedItem="{Binding  Post}" ItemsSource="{Binding Path=DataContext.PostsCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                            <DataGrid  Width="{Binding ElementName=PostColumn, Path=ActualWidth}"  HeadersVisibility="None" AutoGenerateColumns="False" ItemsSource="{Binding EmployeePost}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Post.PostName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <ComboBox SelectedValuePath="ID_Post" DisplayMemberPath="PostName" SelectedValue="{Binding PostId}" SelectedItem="{Binding  Post}" ItemsSource="{Binding Path=DataContext.PostsCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Бригада" Width="1*">
+                <DataGridTemplateColumn Header="Бригада" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Brigade.BrigadeName,UpdateSourceTrigger=PropertyChanged}"></TextBlock>

@@ -100,6 +100,7 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        public List<Model.Employee.Role> Roles { get;private set; }
         public EmployeeViewModel()
         {
             Departments = MainViewModel.EmployeeModel.GetDepartments();
@@ -111,6 +112,7 @@ namespace TrainMonitor.ViewModel.Employee
             Brigades = MainViewModel.EmployeeModel.GetBrigades();
             BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
             MedicalExaminations = MainViewModel.EmployeeModel.GetMedicalExaminations();
+            Roles = MainViewModel.EmployeeModel.GetRole();
 
         }
         public ICommand UpdateDepart => new RelayCommand(() => {

@@ -9,7 +9,14 @@
                       xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel"
                d:DataContext="{d:DesignInstance Type=ViewModel:MainViewModel}"
         Title="MainWindow" Height="450" Width="800">
-
+    <Window.Resources>
+        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontFamily" Value="TimesNewRoman"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
+     </Window.Resources>
 
     <Grid >
         <Grid.ColumnDefinitions>
@@ -20,49 +27,54 @@
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
             </Grid.Effect>
+            <ScrollViewer>
             <StackPanel>
-                <Expander Header="Глава отдела кадров"> 
+                <Expander Header="Глава отдела кадров" x:Name="Cadr"> 
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Сотрудники" Command="{Binding OpenPageCommand}" CommandParameter="Employee"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Отдел" Command="{Binding OpenPageCommand}" CommandParameter="Department"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Должность" Command="{Binding OpenPageCommand}" CommandParameter="Post"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Медицинские осмотры" Command="{Binding OpenPageCommand}" CommandParameter="MedicalView"></Button>
+                        <Button  Content="Сотрудники" Command="{Binding OpenPageCommand}" CommandParameter="Employee"></Button>
+                        <Button  Content="Отдел" Command="{Binding OpenPageCommand}" CommandParameter="Department"></Button>
+                        <Button  Content="Должность" Command="{Binding OpenPageCommand}" CommandParameter="Post"></Button>
+                        <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
+                        <Button  Content="Медицинские осмотры" Command="{Binding OpenPageCommand}" CommandParameter="MedicalView"></Button>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Графист">
+                <Expander Header="Графист" x:Name="Graph">
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Маршрут" Command="{Binding OpenPageCommand}" CommandParameter="Route"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Станция" Command="{Binding OpenPageCommand}" CommandParameter="Stations"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Поезд"  Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"     Command="{Binding OpenPageCommand}" CommandParameter="Schedule" Content="Расписание"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
+                        <Button  Content="Маршрут" Command="{Binding OpenPageCommand}" CommandParameter="Route"></Button>
+                        <Button  Content="Станция" Command="{Binding OpenPageCommand}" CommandParameter="Stations"></Button>
+                        <Button  Content="Поезд"  Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
+                        <Button      Command="{Binding OpenPageCommand}" CommandParameter="Schedule" Content="Расписание"></Button>
+                        <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Продавец">
+                <Expander Header="Продавец" x:Name="Traid">
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Билет" Command="{Binding OpenPageCommand}" CommandParameter="Ticket"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Расписание" Command="{Binding OpenPageCommand}" CommandParameter="Schedule" ></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Поезд"  Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Маршрут" Command="{Binding OpenPageCommand}" CommandParameter="Route"></Button>
+                        <Button  Content="Билет" Command="{Binding OpenPageCommand}" CommandParameter="Ticket"></Button>
+                        <Button  Content="Расписание" Command="{Binding OpenPageCommand}" CommandParameter="Schedule" ></Button>
+                        <Button  Content="Поезд"  Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
+                        <Button  Content="Маршрут" Command="{Binding OpenPageCommand}" CommandParameter="Route"></Button>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Диспетчер поезда">
+                <Expander Header="Диспетчер поезда" x:Name="Disp">
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Обслуживание поезда"  Command="{Binding OpenPageCommand}" CommandParameter="TrainMaintance"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Поезд"  Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
+                        <Button  Content="Обслуживание поезда"  Command="{Binding OpenPageCommand}" CommandParameter="TrainMaintance"></Button>
+                        <Button  Content="Поезд"  Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
+                        <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Главный механик">
+                <Expander Header="Главный механик" x:Name="MainMeh">
                     <StackPanel>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Обслуживание поезда" Command="{Binding OpenPageCommand}" CommandParameter="TrainMaintance"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Виды работ" Command="{Binding OpenPageCommand}" CommandParameter="TrainWorkType"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Поезд" Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
+                        <Button  Content="Обслуживание поезда" Command="{Binding OpenPageCommand}" CommandParameter="TrainMaintance"></Button>
+                        <Button  Content="Виды работ" Command="{Binding OpenPageCommand}" CommandParameter="TrainWorkType"></Button>
+                        <Button  Content="Поезд" Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
+                        <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
                     </StackPanel>
+                </Expander>
+                <Expander Header="Общее">
+                   
                 </Expander>
             </StackPanel>
+            </ScrollViewer>
         </Grid>
         <Frame  NavigationUIVisibility="Hidden" Grid.Column="1"  Content="{Binding PageControl}"></Frame>
     </Grid>

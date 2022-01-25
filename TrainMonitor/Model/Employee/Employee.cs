@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TrainMonitor.Model.Employee
@@ -11,7 +13,7 @@ namespace TrainMonitor.Model.Employee
     public class Employee : BaseViewModel
     {
         private int _id_employee;
-        public Employee(int idEmployee, string login, string email, string password, string surname, string name, string patronymic, string passportSeries, string passportNumber, DateTime birthDate, int postId)
+        public Employee(int idEmployee, string login, string email, string password, string surname, string name, string patronymic, string passportSeries, string passportNumber, DateTime birthDate)
         {
             _id_employee = idEmployee;
             _login = login;
@@ -23,7 +25,7 @@ namespace TrainMonitor.Model.Employee
             _passport_series = passportSeries;
             _passport_number = passportNumber;
             _birth_date = birthDate;
-            _post_id = postId;
+            
         }
        
         [Key]
@@ -136,6 +138,24 @@ namespace TrainMonitor.Model.Employee
             set
             {
                 _phone = value;
+                Regex _Phone = new Regex(@"((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}");
+                Valid_Phone=_Phone.IsMatch(value);
+                if(string.IsNullOrEmpty(value))
+                {
+                    Valid_Phone = true;
+                }
+                OnPropertyChanged();
+            }
+        }
+        
+        private bool valid_phone;
+        [NotMapped]
+        public bool Valid_Phone
+        {
+            get => valid_phone;
+            set
+            {
+                valid_phone = value;
                 OnPropertyChanged();
             }
         }
@@ -152,26 +172,14 @@ namespace TrainMonitor.Model.Employee
                     return "Осмотра небыло";
             }
         }
-        private  int _post_id;
 
-        public int PostId
+        private ObservableCollection<EmployeePost> _employee_post;
+        public ObservableCollection<EmployeePost> EmployeePost
         {
-            get => _post_id;
+            get => _employee_post;
             set
             {
-                _post_id = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Post _post;
-
-        public Post Post
-        {
-            get => _post;
-            set
-            {
-                _post = value;
+                _employee_post = value;
                 OnPropertyChanged();
             }
         }
@@ -201,6 +209,74 @@ namespace TrainMonitor.Model.Employee
         }
         public  Employee(){}
 
+    }
+    public class EmployeePost:BaseViewModel
+    {
+        private int id_employee_post;
+        [Key]
+        public int ID_EmployeePost
+        {
+            get => id_employee_post;
+            set
+            {
+                id_employee_post = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _employee_id;
+        public int EmployeeId
+
+        {
+            get => _employee_id;
+            set
+            {
+                _employee_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Employee _employee;
+        public Employee Employee
+
+        {
+            get => _employee;
+            set
+            {
+                _employee = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _post_id;
+        public int PostId
+
+        {
+            get => _post_id;
+            set
+            {
+                _post_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Post _post;
+        public Post Post
+
+        {
+            get => _post;
+            set
+            {
+                _post = value;
+                OnPropertyChanged();
+            }
+        }
+        public EmployeePost()
+        {
+
+        }
+        public EmployeePost(int id, int emp_id, int post_id)
+        {
+            ID_EmployeePost = id;
+            EmployeeId = emp_id;
+            PostId = post_id;
+        }
     }
     public class Department:BaseViewModel
     {
@@ -296,14 +372,35 @@ namespace TrainMonitor.Model.Employee
                 OnPropertyChanged();
             }
         }
+        private int _role_id;
+        public int RoleId
+        {
+            get => _role_id;
+            set
+            {
+                _role_id= value;
+                OnPropertyChanged();
+            }
+        }
+        private Role role;
+        public Role Role
+        {
+            get => role;
+            set
+            {
+                role = value;
+                OnPropertyChanged();
+            }
+        }
         public  Post(){}
 
-        public Post(int _id, string postName, int salary, int departmentId)
+        public Post(int _id, string postName, int salary, int departmentId, int RoleId)
         {
             ID_Post = _id;
             PostName = postName;
             Salary = salary;
             DepartmentId = departmentId;
+            this.RoleId=RoleId;
         }
     }
     public class Brigade:BaseViewModel
@@ -391,6 +488,18 @@ namespace TrainMonitor.Model.Employee
                 _employee = value;
                 OnPropertyChanged();
             }
+        }
+    }
+    public class Role:BaseViewModel
+    {
+        [Key]
+        public int ID_Role { get; set; }
+        public string RoleName { get; set; }
+        public Role() { }
+        public Role(int id, string name)
+        {
+            ID_Role = id;
+            RoleName = name;
         }
     }
 }
