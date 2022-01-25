@@ -1,0 +1,49 @@
+﻿<Page x:Class="TrainMonitor.View.Train.TrainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TrainMonitor.View.Train"
+      mc:Ignorable="d" 
+        Background="White"
+                      xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel.Train"
+               d:DataContext="{d:DesignInstance Type=ViewModel:TrainViewModel}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TrainView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding Trains}" AutoGenerateColumns="False"  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер поезда" Binding="{Binding TrainNumber}"  Width="1*"> </DataGridTextColumn>
+                <DataGridTextColumn Header="Тип поезда"  Binding="{Binding Train_Type}" Width="1*"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Бригада" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Brigade.BrigadeName,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValuePath="ID_Brigade" DisplayMemberPath="BrigadeName" SelectedValue="{Binding BrigadeId}" SelectedItem="{Binding  Brigade}" ItemsSource="{Binding Path=DataContext.BrigadesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding UpdateTrain}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
+            <Button Grid.Column="3" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding CanselTrain}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
+        </Grid>
+    </Grid>
+</Page>

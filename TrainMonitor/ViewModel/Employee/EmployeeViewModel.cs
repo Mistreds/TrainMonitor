@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace TrainMonitor.ViewModel.Employee
 {
-    public class EmployeeViewModel:BaseViewModel
+    public class EmployeeViewModel : BaseViewModel
     {
         private ObservableCollection<Model.Employee.Department> _departments;
         public ObservableCollection<Model.Employee.Department> Departments
@@ -33,7 +33,7 @@ namespace TrainMonitor.ViewModel.Employee
         private ObservableCollection<Model.Employee.Post> _posts;
         public ObservableCollection<Model.Employee.Post> Posts
         {
-            get=> _posts;
+            get => _posts;
             set
             {
                 _posts = value;
@@ -60,6 +60,16 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<Model.Employee.Employee> _employees_combo;
+        public ObservableCollection<Model.Employee.Employee> EmployeesCombo
+        {
+            get => _employees_combo;
+            set
+            {
+                _employees_combo = value;
+                OnPropertyChanged();
+            }
+        }
         private ObservableCollection<Model.Employee.Brigade> _brigades;
         public ObservableCollection<Model.Employee.Brigade> Brigades
         {
@@ -80,15 +90,27 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        private ObservableCollection<Model.Employee.MedicalExamination> _medicalExamination;
+        public ObservableCollection<Model.Employee.MedicalExamination> MedicalExaminations
+        {
+            get => _medicalExamination;
+            set
+            {
+                _medicalExamination = value;
+                OnPropertyChanged();
+            }
+        }
         public EmployeeViewModel()
         {
             Departments = MainViewModel.EmployeeModel.GetDepartments();
-            DepartmentsCombo=MainViewModel.EmployeeModel.GetDepartmentsCombo();
+            DepartmentsCombo = MainViewModel.EmployeeModel.GetDepartmentsCombo();
             Posts = MainViewModel.EmployeeModel.GetDepartmentsPost();
-            PostsCombo=MainViewModel.EmployeeModel.GetDepartmentsPostCombo();
+            PostsCombo = MainViewModel.EmployeeModel.GetDepartmentsPostCombo();
             Employees = MainViewModel.EmployeeModel.GetEmployee();
+            EmployeesCombo = MainViewModel.EmployeeModel.GetEmployee();
             Brigades = MainViewModel.EmployeeModel.GetBrigades();
             BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
+            MedicalExaminations = MainViewModel.EmployeeModel.GetMedicalExaminations();
 
         }
         public ICommand UpdateDepart => new RelayCommand(() => {
@@ -102,22 +124,33 @@ namespace TrainMonitor.ViewModel.Employee
         });
         public ICommand UpdatePost => new RelayCommand(() => {
             MainViewModel.EmployeeModel.UpdatePost(Posts);
-            Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
+            Posts = MainViewModel.EmployeeModel.GetDepartmentsPost();
+        });
         public ICommand CanselPost => new RelayCommand(() => { Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
-        public ICommand UpdateEmployee => new RelayCommand(() => { MainViewModel.EmployeeModel.UpdateEmployee(Employees);
+        public ICommand UpdateEmployee => new RelayCommand(() => {
+            MainViewModel.EmployeeModel.UpdateEmployee(Employees);
             Employees = MainViewModel.EmployeeModel.GetEmployee();
+            EmployeesCombo = MainViewModel.EmployeeModel.GetEmployee();
+            MainViewModel.RouteViewModel.EmployeesCombo= EmployeesCombo;
         });
         public ICommand CanselEmployee => new RelayCommand(() => {
             Employees = MainViewModel.EmployeeModel.GetEmployee();
+            EmployeesCombo = MainViewModel.EmployeeModel.GetEmployee();
         });
         public ICommand UpdateBrigade => new RelayCommand(() => {
             MainViewModel.EmployeeModel.UpdateBrigade(Brigades);
             Brigades = MainViewModel.EmployeeModel.GetBrigades();
             BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
+            MainViewModel.TrainViewModel.BrigadesCombo=MainViewModel.EmployeeModel.GetBrigadesCombo();
         });
         public ICommand CanselBrigade => new RelayCommand(() => {
             Brigades = MainViewModel.EmployeeModel.GetBrigades();
             BrigadesCombo = MainViewModel.EmployeeModel.GetBrigadesCombo();
         });
+        public ICommand UpdateMedical => new RelayCommand(() => {
+            MainViewModel.EmployeeModel.UpdateMedical(MedicalExaminations);
+            MedicalExaminations = MainViewModel.EmployeeModel.GetMedicalExaminations();
+        });
+        public ICommand CanselMedical => new RelayCommand(() => { MedicalExaminations = MainViewModel.EmployeeModel.GetMedicalExaminations(); });
     }
 }

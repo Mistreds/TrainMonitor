@@ -10,8 +10,8 @@ using TrainMonitor.Model;
 namespace TrainMonitor.Migrations
 {
     [DbContext(typeof(ConnectDB))]
-    [Migration("20220124102521_2")]
-    partial class _2
+    [Migration("20220124174724_4")]
+    partial class _4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,12 +60,12 @@ namespace TrainMonitor.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Department = -1,
+                            ID_Department = 1,
                             DepartmentName = "Пусто"
                         },
                         new
                         {
-                            ID_Department = 1,
+                            ID_Department = 2,
                             DepartmentName = "Администратор"
                         });
                 });
@@ -108,6 +108,9 @@ namespace TrainMonitor.Migrations
                     b.Property<string>("Patronymic")
                         .HasColumnType("text");
 
+                    b.Property<string>("Phone")
+                        .HasColumnType("text");
+
                     b.Property<int>("PostId")
                         .HasColumnType("integer");
 
@@ -135,9 +138,32 @@ namespace TrainMonitor.Migrations
                             Passport_Series = "0000",
                             Password = "Admin",
                             Patronymic = "Admin",
-                            PostId = 1,
+                            PostId = 2,
                             Surname = "Admin"
                         });
+                });
+
+            modelBuilder.Entity("TrainMonitor.Model.Employee.MedicalExamination", b =>
+                {
+                    b.Property<int>("ID_MedicalExamination")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("ExaminationDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("ExaminationResult")
+                        .HasColumnType("text");
+
+                    b.HasKey("ID_MedicalExamination");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("medical_examination");
                 });
 
             modelBuilder.Entity("TrainMonitor.Model.Employee.Post", b =>
@@ -165,15 +191,15 @@ namespace TrainMonitor.Migrations
                     b.HasData(
                         new
                         {
-                            ID_Post = -1,
-                            DepartmentId = -1,
+                            ID_Post = 1,
+                            DepartmentId = 1,
                             PostName = "Пусто",
                             Salary = 0
                         },
                         new
                         {
-                            ID_Post = 1,
-                            DepartmentId = 1,
+                            ID_Post = 2,
+                            DepartmentId = 2,
                             PostName = "Администратор",
                             Salary = 0
                         });
@@ -190,6 +216,15 @@ namespace TrainMonitor.Migrations
                     b.HasOne("TrainMonitor.Model.Employee.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TrainMonitor.Model.Employee.MedicalExamination", b =>
+                {
+                    b.HasOne("TrainMonitor.Model.Employee.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

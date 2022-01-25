@@ -16,7 +16,6 @@ namespace TrainMonitor.ViewModel.Autorization
             this.Autorization = Autorization;
 
         }
-
         public ICommand OpenRegistration => new RelayCommand(() => { 
         
             RegistrationViewModel regViewModel = new RegistrationViewModel();

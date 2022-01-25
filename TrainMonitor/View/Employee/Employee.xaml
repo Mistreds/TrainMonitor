@@ -18,6 +18,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Логин" Width="1*" Binding="{Binding Login}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Email" Width="1*" Binding="{Binding Email}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Телефон" Width="1*" Binding="{Binding Phone}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Фамилия" Width="1*" Binding="{Binding Surname}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя" Width="1*" Binding="{Binding Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Отчество" Width="1*" Binding="{Binding  Patronymic}"></DataGridTextColumn>
@@ -55,10 +56,11 @@
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox SelectedValuePath="Id_Brigade" DisplayMemberPath="BrigadeName" SelectedValue="{Binding BrigadeId}" SelectedItem="{Binding  Brigade}" ItemsSource="{Binding Path=DataContext.BrigadesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                            <ComboBox SelectedValuePath="ID_Brigade" DisplayMemberPath="BrigadeName" SelectedValue="{Binding BrigadeId}" SelectedItem="{Binding  Brigade}" ItemsSource="{Binding Path=DataContext.BrigadesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Мед осмотр" IsReadOnly="True" Binding="{Binding DateMedical, Mode=OneWay}" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">

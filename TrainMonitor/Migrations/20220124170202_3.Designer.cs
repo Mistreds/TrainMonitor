@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrainMonitor.Model;
@@ -9,9 +10,10 @@ using TrainMonitor.Model;
 namespace TrainMonitor.Migrations
 {
     [DbContext(typeof(ConnectDB))]
-    partial class ConnectDBModelSnapshot : ModelSnapshot
+    [Migration("20220124170202_3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,29 +143,6 @@ namespace TrainMonitor.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TrainMonitor.Model.Employee.MedicalExamination", b =>
-                {
-                    b.Property<int>("ID_MedicalExamination")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("ExaminationDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ExaminationResult")
-                        .HasColumnType("text");
-
-                    b.HasKey("ID_MedicalExamination");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("medical_examination");
-                });
-
             modelBuilder.Entity("TrainMonitor.Model.Employee.Post", b =>
                 {
                     b.Property<int>("ID_Post")
@@ -214,15 +193,6 @@ namespace TrainMonitor.Migrations
                     b.HasOne("TrainMonitor.Model.Employee.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TrainMonitor.Model.Employee.MedicalExamination", b =>
-                {
-                    b.HasOne("TrainMonitor.Model.Employee.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

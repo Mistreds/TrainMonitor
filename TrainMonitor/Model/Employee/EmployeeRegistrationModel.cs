@@ -17,6 +17,7 @@ namespace TrainMonitor.Model.Employee
             int value = rnd.Next(100000, 999999);
             try
             {
+                //Где пропущено ставим свои значения, без них отправка письма работать не будет
                 //тут пишется email и имя отправителя
                 MailAddress from = new MailAddress("", "");
                 // кому отправляем

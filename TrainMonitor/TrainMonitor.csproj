@@ -162,19 +162,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\20220124102521_2.cs" />
-    <Compile Include="Migrations\20220124102521_2.designer.cs">
-      <DependentUpon>20220124102521_2.cs</DependentUpon>
+    <Compile Include="Migrations\20220124170202_3.cs" />
+    <Compile Include="Migrations\20220124170202_3.designer.cs">
+      <DependentUpon>20220124170202_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20220124174724_4.cs" />
+    <Compile Include="Migrations\20220124174724_4.designer.cs">
+      <DependentUpon>20220124174724_4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ConnectDBModelSnapshot.cs" />
     <Compile Include="Model\ConnectDB.cs" />
     <Compile Include="Model\Employee\Employee.cs" />
     <Compile Include="Model\Employee\EmployeeModel.cs" />
     <Compile Include="Model\Employee\EmployeeRegistrationModel.cs" />
+    <Compile Include="Model\Route\Route.cs" />
+    <Compile Include="Model\Route\RouteModel.cs" />
+    <Compile Include="Model\Schedule\Schedule.cs" />
+    <Compile Include="Model\Station\Station.cs" />
+    <Compile Include="Model\Ticket\Ticket.cs" />
+    <Compile Include="Model\Train\Train.cs" />
+    <Compile Include="Model\Train\TrainModel.cs" />
     <Compile Include="ViewModel\Autorization\AutorizationViewModel.cs" />
     <Compile Include="ViewModel\Autorization\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\Employee\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Route\RouteViewModel.cs" />
+    <Compile Include="ViewModel\Train\TrainViewModel.cs" />
     <Compile Include="View\Autorization\Autorization.xaml.cs">
       <DependentUpon>Autorization.xaml</DependentUpon>
     </Compile>
@@ -197,6 +210,27 @@
     </Compile>
     <Compile Include="View\Employee\Post.xaml.cs">
       <DependentUpon>Post.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Station\Route.xaml.cs">
+      <DependentUpon>Route.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Station\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Station\Station.xaml.cs">
+      <DependentUpon>Station.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Station\Ticket.xaml.cs">
+      <DependentUpon>Ticket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Train\TrainMaintance.xaml.cs">
+      <DependentUpon>TrainMaintance.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Train\TrainView.xaml.cs">
+      <DependentUpon>TrainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Train\TrainWorkType.xaml.cs">
+      <DependentUpon>TrainWorkType.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Autorization\Autorization.xaml">
       <SubType>Designer</SubType>
@@ -238,6 +272,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Station\Route.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Station\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Station\Station.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Station\Ticket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Train\TrainMaintance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Train\TrainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Train\TrainWorkType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -266,7 +328,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

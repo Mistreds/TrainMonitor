@@ -13,17 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TrainMonitor.View.Employee
+namespace TrainMonitor.View.Station
 {
     /// <summary>
-    /// Логика взаимодействия для MedicalView.xaml
+    /// Логика взаимодействия для Schedule.xaml
     /// </summary>
-    public partial class MedicalView : Page
+    public partial class Schedule : Page
     {
-        public MedicalView(ViewModel.Employee.EmployeeViewModel employeeViewModel)
+        public Schedule(ViewModel.Route.RouteViewModel routeViewModel)
         {
             InitializeComponent();
-            DataContext = employeeViewModel;
+            DataContext=routeViewModel;
         }
     }
 }

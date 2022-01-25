@@ -38,7 +38,7 @@ namespace TrainMonitor.Model.Employee
         public ObservableCollection<Model.Employee.Brigade> GetBrigades()
         {
             var db = new ConnectDB();
-            return new ObservableCollection<Brigade>(db.Brigade.Where(p=>p.Id_Brigade!=1));
+            return new ObservableCollection<Brigade>(db.Brigade.Where(p=>p.ID_Brigade!=1));
 
         }
         public ObservableCollection<Model.Employee.Brigade> GetBrigadesCombo()
@@ -47,9 +47,21 @@ namespace TrainMonitor.Model.Employee
             return new ObservableCollection<Brigade>(db.Brigade);
 
         }
+        public ObservableCollection<Model.Employee.MedicalExamination> GetMedicalExaminations()
+        {
+            var db=new ConnectDB();
+            return new ObservableCollection<MedicalExamination>(db.MedicalExamination.Include(p => p.Employee));
+        }
         public void UpdateBrigade(ObservableCollection<Model.Employee.Brigade> brigades)
         {
             var db = new ConnectDB();
+            foreach (var item in brigades)
+            {
+                if(item.ID_Brigade<1)
+                {
+                    item.ID_Brigade = 0;
+                }
+            }
             db.Brigade.UpdateRange(brigades);
             db.SaveChanges();
         }
@@ -86,6 +98,15 @@ namespace TrainMonitor.Model.Employee
             db.Post.UpdateRange(posts);
             db.SaveChanges();
         }
-       
+       public void UpdateMedical(ObservableCollection<Model.Employee.MedicalExamination> medicalExaminations)
+        {
+            foreach(var emp in medicalExaminations)
+            {
+                emp.Employee = null;
+            }
+            var db= new ConnectDB();
+            db.MedicalExamination.UpdateRange(medicalExaminations);
+            db.SaveChanges();
+        }
     }
 }

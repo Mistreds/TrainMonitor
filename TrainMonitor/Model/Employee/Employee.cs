@@ -25,7 +25,7 @@ namespace TrainMonitor.Model.Employee
             _birth_date = birthDate;
             _post_id = postId;
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       
         [Key]
         public int ID_Employee
         {
@@ -129,6 +129,29 @@ namespace TrainMonitor.Model.Employee
                 OnPropertyChanged();
             }
         }
+        private string _phone;
+        public string Phone
+        {
+            get => _phone;
+            set
+            {
+                _phone = value;
+                OnPropertyChanged();
+            }
+        }
+        [NotMapped]
+        public string DateMedical
+        {
+            get
+            {
+                var db=new Model.ConnectDB();
+                var med = db.MedicalExamination.Where(p => p.EmployeeId == ID_Employee).OrderByDescending(p => p.ExaminationDate).FirstOrDefault();
+                if (med != null)
+                    return med.ExaminationDate.ToString("dd.MM.yyyy");
+                else
+                    return "Осмотра небыло";
+            }
+        }
         private  int _post_id;
 
         public int PostId
@@ -182,7 +205,7 @@ namespace TrainMonitor.Model.Employee
     public class Department:BaseViewModel
     {
         private int _id_department;
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+       
         [Key]
         public int ID_Department
         {
@@ -214,7 +237,7 @@ namespace TrainMonitor.Model.Employee
     public class Post:BaseViewModel
     {
         private int _id_post;
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        
         [Key]
         public int ID_Post
         {
@@ -286,9 +309,8 @@ namespace TrainMonitor.Model.Employee
     public class Brigade:BaseViewModel
     {
         private int _id_brigade;
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public int Id_Brigade
+        public int ID_Brigade
         {
             get => _id_brigade;
             set
@@ -314,6 +336,61 @@ namespace TrainMonitor.Model.Employee
         {
             _id_brigade = idBrigade;
             _brigade_name = brigadeName;
+        }
+    }
+    public class MedicalExamination:BaseViewModel
+    {
+        private int _id_medical_examination;
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int ID_MedicalExamination
+        {
+            get => _id_medical_examination;
+            set
+            {
+                _id_medical_examination = value;
+                OnPropertyChanged();
+            }
+        }
+        private DateTime _examination_date;
+        public DateTime ExaminationDate
+        {
+            get => _examination_date;
+            set
+            {
+                _examination_date= value;
+                OnPropertyChanged();
+            }
+        }
+        private string _examination_result;
+        public string ExaminationResult
+        {
+            get => _examination_result;
+            set
+            {
+                _examination_result = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _employee_id;
+        public int EmployeeId
+        {
+            get => _employee_id;
+            set
+            {
+                _employee_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Employee _employee;
+        public Employee Employee
+        {
+            get => _employee;
+            set
+            {
+                _employee = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

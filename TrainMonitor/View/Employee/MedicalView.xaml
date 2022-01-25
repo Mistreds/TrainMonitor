@@ -5,10 +5,55 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TrainMonitor.View.Employee"
       mc:Ignorable="d" 
+        Background="White"
+                      xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel.Employee"
+               d:DataContext="{d:DesignInstance Type=ViewModel:EmployeeViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MedicalView">
-
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding MedicalExaminations}" AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Дата осмотра">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding ExaminationDate, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding ExaminationDate, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="1*" Header="Результат" Binding="{Binding ExaminationResult,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Сотрудник" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Employee.Surname,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValuePath="ID_Employee" DisplayMemberPath="Surname" SelectedValue="{Binding  EmployeeId}" SelectedItem="{Binding  Employee}" ItemsSource="{Binding Path=DataContext.EmployeesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="20"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Command="{Binding UpdateMedical}" Grid.Column="1" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
+            <Button Command="{Binding CanselMedical}" Grid.Column="3" Style="{StaticResource   MaterialDesignOutlinedButton}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
+        </Grid>
     </Grid>
 </Page>
