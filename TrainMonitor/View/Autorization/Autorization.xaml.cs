@@ -29,8 +29,15 @@ namespace TrainMonitor.View.Autorization
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
             autorizationViewModel.Auth(Login.Text, Password.Password);
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           BackPassword backPassword=new BackPassword();
+            backPassword.Show();
         }
     }
 }

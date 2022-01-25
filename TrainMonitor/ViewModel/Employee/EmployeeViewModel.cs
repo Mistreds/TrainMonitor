@@ -127,8 +127,11 @@ namespace TrainMonitor.ViewModel.Employee
         public ICommand UpdatePost => new RelayCommand(() => {
             MainViewModel.EmployeeModel.UpdatePost(Posts);
             Posts = MainViewModel.EmployeeModel.GetDepartmentsPost();
+            PostsCombo = MainViewModel.EmployeeModel.GetDepartmentsPostCombo();
         });
-        public ICommand CanselPost => new RelayCommand(() => { Posts = MainViewModel.EmployeeModel.GetDepartmentsPost(); });
+        public ICommand CanselPost => new RelayCommand(() => { Posts = MainViewModel.EmployeeModel.GetDepartmentsPost();
+            PostsCombo = MainViewModel.EmployeeModel.GetDepartmentsPostCombo();
+        });
         public ICommand UpdateEmployee => new RelayCommand(() => {
             MainViewModel.EmployeeModel.UpdateEmployee(Employees);
             Employees = MainViewModel.EmployeeModel.GetEmployee();
@@ -154,5 +157,11 @@ namespace TrainMonitor.ViewModel.Employee
             MedicalExaminations = MainViewModel.EmployeeModel.GetMedicalExaminations();
         });
         public ICommand CanselMedical => new RelayCommand(() => { MedicalExaminations = MainViewModel.EmployeeModel.GetMedicalExaminations(); });
+        public ICommand AddEmployee => new RelayCommand(() => {
+
+
+            var reg = new ViewModel.Autorization.RegistrationViewModel(true);
+        
+        });
     }
 }

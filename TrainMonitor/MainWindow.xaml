@@ -62,18 +62,15 @@
                         <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
                     </StackPanel>
                 </Expander>
-                <Expander Header="Главный механик" x:Name="MainMeh">
-                    <StackPanel>
-                        <Button  Content="Обслуживание поезда" Command="{Binding OpenPageCommand}" CommandParameter="TrainMaintance"></Button>
-                        <Button  Content="Виды работ" Command="{Binding OpenPageCommand}" CommandParameter="TrainWorkType"></Button>
-                        <Button  Content="Поезд" Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
-                        <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
-                    </StackPanel>
-                </Expander>
-                <Expander Header="Общее">
-                   
-                </Expander>
-            </StackPanel>
+                    <Expander Header="Главный механик" x:Name="MainMeh">
+                        <StackPanel>
+                            <Button  Content="Обслуживание поезда" Command="{Binding OpenPageCommand}" CommandParameter="TrainMaintance"></Button>
+                            <Button  Content="Виды работ" Command="{Binding OpenPageCommand}" CommandParameter="TrainWorkType"></Button>
+                            <Button  Content="Поезд" Command="{Binding OpenPageCommand}" CommandParameter="TrainView"></Button>
+                            <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
         <Frame  NavigationUIVisibility="Hidden" Grid.Column="1"  Content="{Binding PageControl}"></Frame>

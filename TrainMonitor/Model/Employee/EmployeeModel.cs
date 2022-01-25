@@ -96,7 +96,7 @@ namespace TrainMonitor.Model.Employee
         {
             var db = new ConnectDB();
             db.Department.UpdateRange(departments);
-            db.RemoveRange(db.Department.Where(p => !departments.Select(s => s.ID_Department).Contains(p.ID_Department)));
+            db.RemoveRange(db.Department.Where(p => !departments.Select(s => s.ID_Department).Contains(p.ID_Department) && p.ID_Department!=1 ));
             db.SaveChanges();
         }
         public void UpdatePost(ObservableCollection<Post> posts)

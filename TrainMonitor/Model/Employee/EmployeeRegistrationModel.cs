@@ -19,7 +19,7 @@ namespace TrainMonitor.Model.Employee
             {
                 //Где пропущено ставим свои значения, без них отправка письма работать не будет
                 //тут пишется email и имя отправителя
-                MailAddress from = new MailAddress("spiridonov24@list.ru", "Test");
+                MailAddress from = new MailAddress("", "");
                 // кому отправляем
                 MailAddress to = new MailAddress(email);
                 // создаем объект сообщения
@@ -35,7 +35,7 @@ namespace TrainMonitor.Model.Employee
                 // логин и пароль
                 smtp.UseDefaultCredentials = false;
                 //тут логин и пароль, сейчас настроео чере mail.ru, а там лучше всего сделать для внешний служб отдельный пароль
-                smtp.Credentials = new NetworkCredential("spiridonov24@list.ru", "Q9PbPLzvwanN6QnQCz34");
+                smtp.Credentials = new NetworkCredential("", "");
                 smtp.EnableSsl = true;
                 smtp.Send(m);
             }
