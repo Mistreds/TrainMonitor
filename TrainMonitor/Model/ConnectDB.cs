@@ -41,7 +41,7 @@ namespace TrainMonitor.Model
         {
             //Про Entity Framework Core лучше всего почитать вот тут https://metanit.com/sharp/efcore/1.1.php
             //Тут необходимао прописать настройки postgres, где database желаемое название (база создается автоматически при первом запуске) и password соотвественно пароль
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=train_monitor;Username=postgres;Password=");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=train_monitor;Username=postgres;Password=kbwtq540");
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
