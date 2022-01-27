@@ -11,17 +11,22 @@ namespace TrainMonitor.ViewModel.Autorization
 {
    public class AutorizationViewModel:BaseViewModel
     {
-        private View.Autorization.Autorization Autorization;
-        public AutorizationViewModel(View.Autorization.Autorization Autorization)
+        public static View.Autorization.Autorization Autorization;
+        public AutorizationViewModel()
         {
-            this.Autorization = Autorization;
+            Autorization=new View.Autorization.Autorization(this);
+            Autorization.Show();
+            
 
         }
+      
         public ICommand OpenRegistration => new RelayCommand(() => { 
         
             RegistrationViewModel regViewModel = new RegistrationViewModel();
-                
+           // Autorization.Close();
+
         });
+       
         public void Auth(string login, string password)
         {
             using (var db=new Model.ConnectDB())

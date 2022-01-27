@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Route}" AutoGenerateColumns="False"  >
+        <DataGrid ItemsSource="{Binding Route}" IsReadOnly="{Binding Route_read_only, Converter={StaticResource InvertBooleanConverter}}" AutoGenerateColumns="False"  >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Начальная станция" Width="1*">
                     <DataGridTemplateColumn.CellTemplate>

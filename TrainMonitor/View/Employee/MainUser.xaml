@@ -6,9 +6,78 @@
       xmlns:local="clr-namespace:TrainMonitor.View.Employee"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainUser">
-
+      Title="MainUser" Background="White"
+       xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel"
+               d:DataContext="{d:DesignInstance Type=ViewModel:MainViewModel}"
+         xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes" 
+      >
+    <Page.Resources>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
+            <Setter Property="wpf:HintAssist.IsFloating" Value="False"></Setter>
+            <Setter Property="Height" Value="35"></Setter>
+            <Setter Property="Padding" Value="10,7,0,7" ></Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="1.5*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <TextBlock Text="Введите дату рождения">
+            </TextBlock>
+            <DatePicker SelectedDate="{Binding Employee.Birth_Date}" wpf:HintAssist.Hint="27.05.2003"    Padding="10,7,0,7" Height="35"  wpf:HintAssist.IsFloating="False" Style="{StaticResource MaterialDesignOutlinedDatePicker}"></DatePicker>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="Ввелите Фамилию"></TextBlock>
+            <TextBox  Text="{Binding Employee.Surname, UpdateSourceTrigger=PropertyChanged}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванов"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="1">
+            <TextBlock Text="Введите Имя"></TextBlock>
+            <TextBox  Text="{Binding Employee.Name, UpdateSourceTrigger=PropertyChanged}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иван"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1">
+            <TextBlock Text="Введите Отчество"></TextBlock>
+            <TextBox Text="{Binding Employee.Patronymic, UpdateSourceTrigger=PropertyChanged}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванович"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="1">
+            <TextBlock Text="Введите серию паспорта"></TextBlock>
+            <TextBox Text="{Binding Employee.Passport_Series, UpdateSourceTrigger=PropertyChanged}"      Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="29 18"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="3">
+            <TextBlock Text="Почта"></TextBlock>
+            <TextBox IsReadOnly="True"  Text="{Binding Employee.Email}"     Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="E-mail"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="3">
+            <TextBlock Text="Логин"></TextBlock>
+            <TextBox IsReadOnly="True"   Text="{Binding Employee.Login, UpdateSourceTrigger=PropertyChanged}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Логин"   ></TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="3">
+            <TextBlock Text="Старый пароль"></TextBlock>
+            <PasswordBox PasswordChar="*" x:Name="password1"   Style="{StaticResource MaterialDesignOutlinedPasswordBox}"    wpf:HintAssist.IsFloating="False"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="*******"   ></PasswordBox>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="3">
+            <TextBlock Text="Новый пароль"></TextBlock>
+            <PasswordBox  PasswordChar="*" x:Name="password2" Style="{StaticResource MaterialDesignOutlinedPasswordBox}"    wpf:HintAssist.IsFloating="False"  Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="*******"   ></PasswordBox>
+        </StackPanel>
+        <StackPanel Grid.Row="5" Grid.Column="3">
+            <TextBlock Text="Введите номер паспорта"></TextBlock>
+            <TextBox  Text="{Binding  Employee.Passport_Number, UpdateSourceTrigger=PropertyChanged}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="903 132"   ></TextBox>
+        </StackPanel>
+        <Button Grid.Column="1" Grid.Row="7"  Style="{StaticResource   MaterialDesignOutlinedButton}"  Content="Редактировать"  Grid.ColumnSpan="3" Width="200"  Command="{Binding UpdateEmployee}" BorderBrush="Black" Foreground="Black" >
+
+        </Button>
     </Grid>
 </Page>

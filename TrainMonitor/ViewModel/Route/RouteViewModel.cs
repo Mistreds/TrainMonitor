@@ -101,6 +101,11 @@ namespace TrainMonitor.ViewModel.Route
             }
         }
         public List<Model.Route.RouteType> RouterTypes { get; private set; }
+        public bool Station_read_only { get; set; }
+        public bool Route_read_only { get; set; }
+        public bool Schedules_read_only { get; set; }
+        public bool Ticket_read_only { get; set; }
+        
         public RouteViewModel()
         {
             RouterTypes = MainViewModel.RouteModel.GetRouteTypes();

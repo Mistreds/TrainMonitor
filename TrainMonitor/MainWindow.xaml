@@ -8,7 +8,7 @@
         mc:Ignorable="d"
                       xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel"
                d:DataContext="{d:DesignInstance Type=ViewModel:MainViewModel}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="650" Width="1200">
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
             <Setter Property="Foreground" Value="Black"></Setter>
@@ -27,8 +27,8 @@
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
             </Grid.Effect>
-            <ScrollViewer>
-            <StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Style="{StaticResource MaterialDesignScrollViewer}">
+            <StackPanel >
                 <Expander Header="Глава отдела кадров" x:Name="Cadr"> 
                     <StackPanel>
                         <Button  Content="Сотрудники" Command="{Binding OpenPageCommand}" CommandParameter="Employee"></Button>
@@ -70,6 +70,7 @@
                             <Button  Content="Бригада" Command="{Binding OpenPageCommand}" CommandParameter="Brigade"></Button>
                         </StackPanel>
                     </Expander>
+                    <Button Command="{Binding OpenPageEmpEdit}" Content="Личные данные"></Button>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

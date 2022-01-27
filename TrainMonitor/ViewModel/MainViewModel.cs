@@ -29,8 +29,19 @@ namespace TrainMonitor.ViewModel
         public static Model.Employee.EmployeeModel EmployeeModel { get; private set; }
         public static Model.Train.TrainModel TrainModel { get; private set; }
         public static Model.Route.RouteModel RouteModel { get; private set; }
-        public MainViewModel() 
+        private Model.Employee.Employee _employee;
+        public Model.Employee.Employee Employee
         {
+            get => _employee;
+            set
+            {
+                _employee = value;
+                OnPropertyChanged();
+            }
+        }
+        public MainViewModel(Model.Employee.Employee Employee) 
+        {
+            this.Employee = Employee;
             EmployeeModel=new Model.Employee.EmployeeModel();
             TrainModel=new Model.Train.TrainModel();
             RouteModel=new Model.Route.RouteModel();  
@@ -45,5 +56,25 @@ namespace TrainMonitor.ViewModel
             Console.WriteLine(page);
             PageControl = PagesControl[page];
         }
+        private View.Employee.MainUser MainUser;
+        public ICommand OpenPageEmpEdit => new RelayCommand(() => {
+
+            MainUser =new View.Employee.MainUser(Employee,this);
+            PageControl = MainUser;
+
+
+        });
+        public ICommand UpdateEmployee => new RelayCommand(() => { 
+        
+        using (var db=new Model.ConnectDB())
+            {
+                string pass = MainUser.GetPassword();
+                if(pass != null)
+                    Employee.Password = pass;
+                db.Update(Employee);
+                db.SaveChanges();
+            }
+        
+        });
     }
 }

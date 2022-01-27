@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding  TrainWorkTypes}" AutoGenerateColumns="False"  >
+        <DataGrid IsReadOnly="{Binding train_WorkTypes_read_only, Converter={StaticResource InvertBooleanConverter}}" ItemsSource="{Binding  TrainWorkTypes}" AutoGenerateColumns="False"  >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Тип работ" Binding="{Binding WorkName}"  Width="1*"></DataGridTextColumn>
             </DataGrid.Columns>

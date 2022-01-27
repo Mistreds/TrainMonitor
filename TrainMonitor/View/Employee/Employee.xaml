@@ -14,7 +14,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" CanUserAddRows="False" ItemsSource="{Binding Employees}" AutoGenerateColumns="False" >
+        <DataGrid IsReadOnly="{Binding is_read_only_emp,Converter={StaticResource InvertBooleanConverter}}"  CanUserAddRows="False" ItemsSource="{Binding Employees}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Логин"  Binding="{Binding Login}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Email"  Binding="{Binding Email}"></DataGridTextColumn>
@@ -90,7 +90,7 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="1" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding UpdateEmployee}" BorderBrush="Black" Foreground="Black" Content="Сохранить" ></Button>
             <Button Grid.Column="3" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding CanselEmployee}" BorderBrush="Black" Foreground="Black" Content="Отменить" ></Button>
-            <Button Grid.Column="5" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding AddEmployee}" BorderBrush="Black" Foreground="Black" Content="Добавить" ></Button>
+            <Button IsEnabled="{Binding is_read_only_emp}" Grid.Column="5" Style="{StaticResource   MaterialDesignOutlinedButton}" Command="{Binding AddEmployee}" BorderBrush="Black" Foreground="Black" Content="Добавить" ></Button>
         </Grid>
     </Grid>
 </Page>

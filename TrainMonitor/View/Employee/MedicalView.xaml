@@ -15,7 +15,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding MedicalExaminations}" AutoGenerateColumns="False" >
+        <DataGrid IsReadOnly="{Binding is_read_only_Med, Converter={StaticResource InvertBooleanConverter}}" CanUserDeleteRows="False" ItemsSource="{Binding MedicalExaminations}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Дата осмотра">
                     <DataGridTemplateColumn.CellTemplate>

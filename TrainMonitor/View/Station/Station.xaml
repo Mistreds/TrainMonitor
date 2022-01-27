@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding  Stations}" AutoGenerateColumns="False"  >
+        <DataGrid IsReadOnly="{Binding Station_read_only, Converter={StaticResource InvertBooleanConverter}}" ItemsSource="{Binding  Stations}" AutoGenerateColumns="False"  >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название станции" Binding="{Binding StationName}"  Width="1*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Номер станции" Binding="{Binding StationNumber}"  Width="1*"></DataGridTextColumn>

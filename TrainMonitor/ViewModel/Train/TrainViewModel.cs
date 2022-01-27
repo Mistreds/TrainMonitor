@@ -70,7 +70,10 @@ namespace TrainMonitor.ViewModel.Train
                 OnPropertyChanged();
             }
         }
-
+        public bool train_read_only { get; set; }
+        public bool train_WorkTypes_read_only { get; set; }
+        public bool train_TrainMaintances_read_only { get; set; }
+        
         public TrainViewModel()
         {
             BrigadesCombo = MainViewModel.EmployeeViewModel.BrigadesCombo;

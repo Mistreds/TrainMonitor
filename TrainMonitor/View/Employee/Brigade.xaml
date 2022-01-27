@@ -10,12 +10,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Brigade">
 
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding Brigades}" AutoGenerateColumns="False" >
+        <DataGrid CanUserDeleteRows="False" IsReadOnly="{Binding is_read_only_brigade, Converter={StaticResource InvertBooleanConverter}}" ItemsSource="{Binding Brigades}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Наименование бригады" Binding="{Binding BrigadeName}"></DataGridTextColumn>
             </DataGrid.Columns>

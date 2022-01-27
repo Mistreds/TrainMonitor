@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding Schedules}" AutoGenerateColumns="False" >
+        <DataGrid IsReadOnly="{Binding Schedules_read_only, Converter={StaticResource InvertBooleanConverter}}" CanUserDeleteRows="False" ItemsSource="{Binding Schedules}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Дата отправки">
                     <DataGridTemplateColumn.CellTemplate>

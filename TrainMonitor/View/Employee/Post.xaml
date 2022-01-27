@@ -16,7 +16,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid CanUserDeleteRows="False" ItemsSource="{Binding Posts}" AutoGenerateColumns="False" >
+        <DataGrid IsReadOnly="{Binding is_read_only_post, Converter={StaticResource InvertBooleanConverter}}" CanUserDeleteRows="False" ItemsSource="{Binding Posts}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Наименование должности" Binding="{Binding PostName,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                 <DataGridTextColumn Width="1*" Header="Оклад" Binding="{Binding Salary,UpdateSourceTrigger=PropertyChanged}"> </DataGridTextColumn>

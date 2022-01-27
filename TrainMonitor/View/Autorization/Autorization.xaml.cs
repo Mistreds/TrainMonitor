@@ -20,11 +20,11 @@ namespace TrainMonitor.View.Autorization
     public partial class Autorization : Window
     {
         private ViewModel.Autorization.AutorizationViewModel autorizationViewModel;
-        public Autorization()
+        public Autorization(ViewModel.Autorization.AutorizationViewModel autorizationViewModel)
         {
             InitializeComponent();
-            autorizationViewModel=new ViewModel.Autorization.AutorizationViewModel(this);
-            DataContext = autorizationViewModel;
+            this.autorizationViewModel = autorizationViewModel; 
+            DataContext = this.autorizationViewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

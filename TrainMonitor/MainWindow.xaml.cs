@@ -20,49 +20,62 @@ namespace TrainMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ViewModel.MainViewModel mainViewModel;
         public MainWindow(Model.Employee.Employee employee )
         {
             InitializeComponent();
-            DataContext = new ViewModel.MainViewModel();
+            mainViewModel = new ViewModel.MainViewModel(employee);
+            DataContext = mainViewModel;
             IsValid(employee);
         }
        private void IsValid(Model.Employee.Employee employee)
         {
-            Cadr.Visibility = Visibility.Collapsed;
-            Graph.Visibility = Visibility.Collapsed;
-            Traid.Visibility = Visibility.Collapsed;
-            Disp.Visibility = Visibility.Collapsed;
-            MainMeh.Visibility = Visibility.Collapsed;  
+          
 
             if(employee.EmployeePost.Any(p=>p.Post.RoleId==1))
             {
-                Cadr.Visibility = Visibility.Visible;
-                Graph.Visibility = Visibility.Visible;
-                Traid.Visibility = Visibility.Visible;
-                Disp.Visibility = Visibility.Visible;
-                MainMeh.Visibility = Visibility.Visible;
 
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_brigade = true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_Dep=true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_emp=true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_Med = true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_post=true;
+                ViewModel.MainViewModel.RouteViewModel.Route_read_only = true;
+                ViewModel.MainViewModel.RouteViewModel.Station_read_only = true;
+                ViewModel.MainViewModel.RouteViewModel.Schedules_read_only = true;
+                ViewModel.MainViewModel.RouteViewModel.Ticket_read_only = true;
+                ViewModel.MainViewModel.TrainViewModel.train_read_only = true;
+                ViewModel.MainViewModel.TrainViewModel.train_WorkTypes_read_only = true;
+                ViewModel.MainViewModel.TrainViewModel.train_TrainMaintances_read_only = true;
                 return;
             }
             if (employee.EmployeePost.Any(p => p.Post.RoleId == 2))
             {
-                Cadr.Visibility = Visibility.Visible;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_brigade = true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_Dep = true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_emp = true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_Med = true;
+                ViewModel.MainViewModel.EmployeeViewModel.is_read_only_post = true;
             }
             if (employee.EmployeePost.Any(p => p.Post.RoleId == 3))
             {
-                Graph.Visibility = Visibility.Visible;
+                ViewModel.MainViewModel.RouteViewModel.Route_read_only = true;
+                ViewModel.MainViewModel.RouteViewModel.Station_read_only=true;
+                ViewModel.MainViewModel.RouteViewModel.Schedules_read_only = true;
             }
             if (employee.EmployeePost.Any(p => p.Post.RoleId == 4))
             {
-                Traid.Visibility = Visibility.Visible;
+                ViewModel.MainViewModel.RouteViewModel.Ticket_read_only = true;
             }
             if (employee.EmployeePost.Any(p => p.Post.RoleId == 5))
             {
-                Disp.Visibility = Visibility.Visible;
+                ViewModel.MainViewModel.TrainViewModel.train_read_only = true;
             }
             if (employee.EmployeePost.Any(p => p.Post.RoleId == 6))
             {
-                MainMeh.Visibility = Visibility.Visible;
+                ViewModel.MainViewModel.TrainViewModel.train_read_only = true;
+                ViewModel.MainViewModel.TrainViewModel.train_WorkTypes_read_only = true;
+                ViewModel.MainViewModel.TrainViewModel.train_TrainMaintances_read_only = true;
             }
         }
 

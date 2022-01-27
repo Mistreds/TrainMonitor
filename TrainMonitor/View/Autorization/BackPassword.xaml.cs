@@ -55,10 +55,19 @@ namespace TrainMonitor.View.Autorization
         private void Pass_but_Click(object sender, RoutedEventArgs e)
         {
             var db = new Model.ConnectDB();
-           var emp=db.Employee.Where(p=>p.Email == Mail.Text).FirstOrDefault();
-            emp.Password = Pass.Password;
-            db.Update(emp);
-            db.SaveChanges();   
+            try
+
+            {
+                var emp = db.Employee.Where(p => p.Email == Mail.Text).FirstOrDefault();
+                emp.Password = Pass.Password;
+                db.Update(emp);
+                db.SaveChanges();
+                MessageBox.Show("Пароль успешно изменен", "Успех");
+            }
+          catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка");
+            }
 
         }
     }

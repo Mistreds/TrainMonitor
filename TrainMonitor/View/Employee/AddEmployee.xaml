@@ -39,19 +39,19 @@
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Ввелите Фамилию"></TextBlock>
-            <TextBox  Text="{Binding AddEmployee.Surname}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванов"   ></TextBox>
+            <TextBox  Text="{Binding AddEmployee.Surname, UpdateSourceTrigger=PropertyChanged}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванов"   ></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1">
             <TextBlock Text="Введите Имя"></TextBlock>
-            <TextBox  Text="{Binding AddEmployee.Name}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иван"   ></TextBox>
+            <TextBox  Text="{Binding AddEmployee.Name, UpdateSourceTrigger=PropertyChanged}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иван"   ></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="4" Grid.Column="1">
             <TextBlock Text="Введите Отчество"></TextBlock>
-            <TextBox Text="{Binding AddEmployee.Patronymic}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванович"   ></TextBox>
+            <TextBox Text="{Binding AddEmployee.Patronymic, UpdateSourceTrigger=PropertyChanged}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Иванович"   ></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="1">
             <TextBlock Text="Введите серию паспорта"></TextBlock>
-            <TextBox Text="{Binding AddEmployee.Passport_Series}"      Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="29 18"   ></TextBox>
+            <TextBox Text="{Binding AddEmployee.Passport_Series, UpdateSourceTrigger=PropertyChanged}"      Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="29 18"   ></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="3">
             <TextBlock Text="Придумайте  адрес электронной почты"></TextBlock>
@@ -59,7 +59,7 @@
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="3">
             <TextBlock Text="Придумайте логин"></TextBlock>
-            <TextBox   Text="{Binding AddEmployee.Login}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Логин"   ></TextBox>
+            <TextBox   Text="{Binding AddEmployee.Login, UpdateSourceTrigger=PropertyChanged}"   Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="Логин"   ></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="3">
             <TextBlock Text="Придумайте пароль"></TextBlock>
@@ -71,7 +71,7 @@
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="3">
             <TextBlock Text="Введите номер паспорта"></TextBlock>
-            <TextBox  Text="{Binding  AddEmployee.Passport_Number}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="903 132"   ></TextBox>
+            <TextBox  Text="{Binding  AddEmployee.Passport_Number, UpdateSourceTrigger=PropertyChanged}"    Height="35" Padding="10,7,0,7"  wpf:HintAssist.Hint="903 132"   ></TextBox>
         </StackPanel>
         <Button Grid.Column="1" Grid.Row="7"  Style="{StaticResource   MaterialDesignOutlinedButton}"  Content="Создать пользователя"  Grid.ColumnSpan="3" Width="200"  Command="{Binding Registration}" BorderBrush="Black" Foreground="Black" >
         

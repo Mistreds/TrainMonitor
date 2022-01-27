@@ -17,7 +17,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid  ItemsSource="{Binding Departments}" AutoGenerateColumns="False" >
+        <DataGrid IsReadOnly="{Binding is_read_only_Dep, Converter={StaticResource InvertBooleanConverter}}"  ItemsSource="{Binding Departments}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Наименование отдела" Binding="{Binding DepartmentName}"></DataGridTextColumn>
             </DataGrid.Columns>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,54 @@ namespace TrainMonitor.View.Employee
     /// </summary>
     public partial class MainUser : Page
     {
-        public MainUser()
+        private Model.Employee.Employee _employee;
+        public MainUser(Model.Employee.Employee Employee,ViewModel.MainViewModel viewModel)
         {
+            this._employee = Employee;
+            DataContext = viewModel;
+            
             InitializeComponent();
+        }
+        public string GetPassword()
+        {
+            if(password2.Password.Length==0)
+            {
+                return null;
+            }
+            if(password1.Password!=_employee.Password)
+            {
+                MessageBox.Show("Старый пароль не верный", "Ошибка");
+                return null;
+            }
+            if (password1.Password != password2.Password)
+            {
+                if (password2.Password.Length < 8)
+                {
+                    MessageBox.Show("Длинна пароля меньше 8 символов", "Ошибка");
+                    return null;
+                }
+
+                Regex regex_latin = new Regex("([A-Z])|([a-z])");
+
+                if (regex_latin.Matches(password2.Password).Count < 5)
+                {
+                    MessageBox.Show("Кол-во латинский букв  в пароле меньше 5", "Ошибка");
+                    return null;
+                }
+                Regex regex_number = new Regex("([0-9])");
+                if (regex_number.Matches(password2.Password).Count < 3)
+                {
+                    MessageBox.Show("Кол-во цифр в пароле меньше 3", "Ошибка");
+                    return null;
+                }
+                return password2.Password;
+            }
+            else
+            {
+                MessageBox.Show("Старый и новый пароль совпадает", "Ошибка");
+                return null;
+            }
+
         }
     }
 }

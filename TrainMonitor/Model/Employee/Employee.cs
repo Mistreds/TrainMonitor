@@ -44,7 +44,11 @@ namespace TrainMonitor.Model.Employee
             get => _login;
             set
             {
+                Regex regex_login = new Regex("([A-Z])|([a-z])");
+               
                 _login = value;
+                
+                _login = Regex.Replace(_login, @"[(\s!@\#\$%\^&\*\(\)_\+=\-'\\:\|/`~\.,\{}\)]+", "");
                 OnPropertyChanged();
             }
         }
@@ -75,6 +79,7 @@ namespace TrainMonitor.Model.Employee
             set
             {
                 _surname = value;
+                _surname = Regex.Replace(_surname, @"[0-9\(\s!@\#\$%\^&\*\(\)_\+=\-'\\:\|/`~\.,\{}\)]+", "");
                 OnPropertyChanged();
             }
         }
@@ -85,6 +90,7 @@ namespace TrainMonitor.Model.Employee
             set
             {
                 _name = value;
+                _name = Regex.Replace(_name, @"[0-9\(\s!@\#\$%\^&\*\(\)_\+=\-'\\:\|/`~\.,\{}\)]+", "");
                 OnPropertyChanged();
             }
         }
@@ -95,6 +101,7 @@ namespace TrainMonitor.Model.Employee
             set
             {
                 _patronymic = value;
+                _patronymic = Regex.Replace(_patronymic, @"[0-9\(\s!@\#\$%\^&\*\(\)_\+=\-'\\:\|/`~\.,\{}\)]+", "");
                 OnPropertyChanged();
             }
         }
@@ -105,7 +112,13 @@ namespace TrainMonitor.Model.Employee
             get => _passport_series;
             set
             {
-                _passport_series = value;
+                if (value != null)
+                {
+                    if (value.Length > 4)
+                        return;
+                    _passport_series = Regex.Replace(value, @"[^\d]+", "");
+
+                }
                 OnPropertyChanged();
             }
 
@@ -117,7 +130,15 @@ namespace TrainMonitor.Model.Employee
             get => _passport_number;
             set
             {
-                _passport_number = value;
+                if(value!=null)
+                {
+                    if (value.Length > 6)
+                        return;
+                    _passport_number = Regex.Replace(value, @"[^\d]+", "");
+
+                }
+                 
+                
                 OnPropertyChanged();
             }
         }

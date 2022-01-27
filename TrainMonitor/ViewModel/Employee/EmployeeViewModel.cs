@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace TrainMonitor.ViewModel.Employee
@@ -60,6 +61,7 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+      
         private ObservableCollection<Model.Employee.Employee> _employees_combo;
         public ObservableCollection<Model.Employee.Employee> EmployeesCombo
         {
@@ -100,9 +102,15 @@ namespace TrainMonitor.ViewModel.Employee
                 OnPropertyChanged();
             }
         }
+        public bool is_read_only_emp { get; set; }
+        public bool is_read_only_post { get; set; }
+        public bool is_read_only_brigade { get; set; }
+        public bool is_read_only_Med { get; set; }
+        public bool is_read_only_Dep { get; set; }
         public List<Model.Employee.Role> Roles { get;private set; }
         public EmployeeViewModel()
         {
+      
             //observablecollection это коллекция с отслеживанием изменений, идеальна для патерна mvvm
             //Тут инициализация коллеций
             //Из модель обращается к базе данных, и данный view model получает коллекцию
@@ -176,5 +184,6 @@ namespace TrainMonitor.ViewModel.Employee
             var reg = new ViewModel.Autorization.RegistrationViewModel(true);
         
         });
+        
     }
 }

@@ -161,6 +161,7 @@ namespace TrainMonitor.ViewModel.Autorization
                 MainViewModel.EmployeeViewModel.EmployeesCombo = MainViewModel.EmployeeModel.GetEmployee();
                 MainViewModel.RouteViewModel.EmployeesCombo = MainViewModel.EmployeeModel.GetEmployee();
                 registration.Close();
+                
             }
             catch (Exception ex)
             {
