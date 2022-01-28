@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -74,7 +75,6 @@ namespace TrainMonitor.Model.Route
                 if(TerminalStation != null && InitialStation!=null)
                 {
                     RouteText = $"{InitialStation.StationName}-{TerminalStation.StationName}";
-                    Console.WriteLine(RouteText);
                 }
                 OnPropertyChanged();
             }
@@ -106,6 +106,23 @@ namespace TrainMonitor.Model.Route
                 }
                 OnPropertyChanged();
             }
+        }
+
+        private ObservableCollection<RouteStation> _routeStations;
+
+        public ObservableCollection<RouteStation> RouteStation
+        {
+            get => _routeStations;
+            set
+            {
+                _routeStations = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Route()
+        {
+            RouteStation = new ObservableCollection<RouteStation>();
         }
     }
 
@@ -139,6 +156,68 @@ namespace TrainMonitor.Model.Route
         {
             _type_id = typeId;
             _route_type_name = routeTypeName;
+        }
+    }
+
+    public class RouteStation : BaseViewModel
+    {
+        private int id_route_station;
+        [Key]
+        public int ID_RouteStation
+        {
+            get => id_route_station;
+            set
+            {
+                id_route_station = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _route_id;
+        public int RouteId
+
+        {
+            get => _route_id;
+            set
+            {
+                _route_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Route _route;
+        public Route Route
+
+        {
+            get => _route;
+            set
+            {
+                _route = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _station_id;
+        public int StationId
+
+        {
+            get =>_station_id;
+            set
+            {
+                _station_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Station.Station _station;
+        public Station.Station Station
+        {
+            get => _station;
+            set
+            {
+                _station = value;
+                OnPropertyChanged();
+            }
+        }
+        public RouteStation ()
+        {
+
         }
     }
 }

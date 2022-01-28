@@ -205,24 +205,10 @@ namespace TrainMonitor.Model.Employee
                 OnPropertyChanged();
             }
         }
-        private int _brigade_id;
-
-      
-        public int BrigadeId
+        private ObservableCollection<EmployeeBrigade> _brigade;
+        public ObservableCollection<EmployeeBrigade> EmployeeBrigade
         {
-            get => _brigade_id;
-            set
-            {
-                _brigade_id = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private Brigade _brigade;
-
-        public Brigade Brigade
-        {
-            get =>  _brigade;
+            get => _brigade;
             set
             {
                 _brigade = value;
@@ -449,12 +435,33 @@ namespace TrainMonitor.Model.Employee
             }
         }
 
+        private int _employee_id;
+        public int EmployeeId
+        {
+            get => _employee_id;
+            set
+            {
+                _employee_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Employee _employee;
+        public Employee Employee
+        {
+            get => _employee;
+            set
+            {
+                _employee = value;
+                OnPropertyChanged();
+            }
+        }
         public Brigade(){}
 
         public Brigade(int idBrigade, string brigadeName)
         {
             _id_brigade = idBrigade;
             _brigade_name = brigadeName;
+            _employee_id = 1;
         }
     }
     public class MedicalExamination:BaseViewModel
@@ -522,6 +529,74 @@ namespace TrainMonitor.Model.Employee
         {
             ID_Role = id;
             RoleName = name;
+        }
+    }
+    public class EmployeeBrigade:BaseViewModel
+    {
+        private int id_employee_brigade;
+        [Key]
+        public int ID_EmployeeBrigade
+        {
+            get => id_employee_brigade;
+            set
+            {
+                id_employee_brigade = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _employee_id;
+        public int EmployeeId
+
+        {
+            get => _employee_id;
+            set
+            {
+                _employee_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Employee _employee;
+        public Employee Employee
+
+        {
+            get => _employee;
+            set
+            {
+                _employee = value;
+                OnPropertyChanged();
+            }
+        }
+        private int _brigade_id;
+        public int BrigadeId
+
+        {
+            get =>_brigade_id;
+            set
+            {
+                _brigade_id = value;
+                OnPropertyChanged();
+            }
+        }
+        private Brigade _brigade;
+        public Brigade Brigade
+
+        {
+            get => _brigade;
+            set
+            {
+                _brigade = value;
+                OnPropertyChanged();
+            }
+        }
+        public EmployeeBrigade()
+        {
+
+        }
+        public EmployeeBrigade(int id, int emp_id, int post_id)
+        {
+            ID_EmployeeBrigade = id;
+            EmployeeId = emp_id;
+            BrigadeId = post_id;
         }
     }
 }

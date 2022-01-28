@@ -54,6 +54,33 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn IsReadOnly="False" Header="Станции на маршруте" Width="150" x:Name="StationColumn" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListBox  ItemsSource="{Binding  RouteStation}" DisplayMemberPath="Station.StationName"></ListBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DataGrid  Width="{Binding ElementName=StationColumn, Path=ActualWidth}"  HeadersVisibility="None" AutoGenerateColumns="False" ItemsSource="{Binding RouteStation}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding  Station.StationName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <ComboBox SelectedValuePath="ID_Station" DisplayMemberPath="StationName" SelectedValue="{Binding StationId}" SelectedItem="{Binding Station, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Path=DataContext.StationsCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">

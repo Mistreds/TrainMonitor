@@ -4,13 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TrainMonitor.View.Train"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"    xmlns:conv="clr-namespace:TrainMonitor.Model"
       Background="White"
          xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel.Train"
                d:DataContext="{d:DesignInstance Type=ViewModel:TrainViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrainMaintance">
-
+    <Page.Resources>
+        <conv:DateTimeConvert x:Key="Conv"></conv:DateTimeConvert>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -21,7 +23,7 @@
                 <DataGridTemplateColumn Header="Дата проведения">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding DateOfheWork,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <TextBlock Text="{Binding DateOfheWork,UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Conv}}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>

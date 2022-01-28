@@ -18,7 +18,7 @@ namespace TrainMonitor
         public App()
         {
             ViewModel.Autorization.AutorizationViewModel autorizationViewModel = new ViewModel.Autorization.AutorizationViewModel(); 
-            this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
+        //    this.DispatcherUnhandledException += new DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
         }
         void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {

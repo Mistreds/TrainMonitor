@@ -18,12 +18,13 @@ namespace TrainMonitor.Model.Route
         public ObservableCollection<Route> GetRoute()
         {
             var db = new ConnectDB();
-            return new ObservableCollection<Route>(db.Route.Include(p => p.InitialStation).Include(p => p.TerminalStation).Include(p => p.RouteType));
+            return new ObservableCollection<Route>(db.Route.Include(p => p.RouteStation
+            ).ThenInclude(p => p.Station).Include(p => p.InitialStation).Include(p => p.TerminalStation).Include(p => p.RouteType));
         }
         public ObservableCollection<Schedule.Schedule> GetSchedule()
         {
             var db = new ConnectDB();
-            return new ObservableCollection<Schedule.Schedule>(db.Schedule.Include(p => p.Train).Include(p => p.Route));
+            return new ObservableCollection<Schedule.Schedule>(db.Schedule.Include(p => p.Train).Include(p => p.Route).ThenInclude(p => p.InitialStation).Include(p => p.Route).ThenInclude(p => p.TerminalStation));
         }
         public ObservableCollection<Ticket.Ticket> GetTicket()
         {
@@ -39,6 +40,7 @@ namespace TrainMonitor.Model.Route
         {
             var db = new ConnectDB();
             db.UpdateRange(stations);
+            db.RemoveRange(db.Station.Where(p => !stations.Select(s => s.ID_Station).Contains(p.ID_Station)));
             db.SaveChanges();
 
         }
@@ -49,9 +51,18 @@ namespace TrainMonitor.Model.Route
             {
                 route.InitialStation = null; 
                 route.TerminalStation = null;
+                foreach(var st in route.RouteStation)
+                {
+                    st.Station= null;
+                }
                 route.RouteType = null;
+                if (route.ID_Route == 0)
+                    continue;
+                db.RemoveRange(db.RouteStation.Where(p => !route.RouteStation.Select(s => s.ID_RouteStation).Contains(p.ID_RouteStation) && p.RouteId == route.ID_Route));
+               
             }
             db.UpdateRange(routes);
+            db.RemoveRange(db.Route.Where(p => !routes.Select(s => s.ID_Route).Contains(p.ID_Route)));
             db.SaveChanges();
         }
         public void UpdateSchedule(ObservableCollection<Schedule.Schedule> schedules)
@@ -63,6 +74,7 @@ namespace TrainMonitor.Model.Route
                 sched.Route = null;
             }
             db.UpdateRange(schedules);
+            db.RemoveRange(db.Schedule.Where(p => !schedules.Select(s => s.ID_Schedule).Contains(p.ID_Schedule)));
             db.SaveChanges();
         }
         public void UpdateTicket(ObservableCollection<Ticket.Ticket> tickets)
@@ -74,6 +86,7 @@ namespace TrainMonitor.Model.Route
                 tick.Schedule= null;
             }
             db.UpdateRange(tickets);
+            db.RemoveRange(db.Ticket.Where(p => !tickets.Select(s => s.ID_Ticket).Contains(p.ID_Ticket)));
             db.SaveChanges();
         }
     }

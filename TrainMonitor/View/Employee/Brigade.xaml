@@ -18,6 +18,18 @@
         <DataGrid CanUserDeleteRows="False" IsReadOnly="{Binding is_read_only_brigade, Converter={StaticResource InvertBooleanConverter}}" ItemsSource="{Binding Brigades}" AutoGenerateColumns="False" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Наименование бригады" Binding="{Binding BrigadeName}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Начальник бригады" Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Employee.Surname,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <ComboBox SelectedValuePath="ID_Employee" DisplayMemberPath="Surname" SelectedValue="{Binding  EmployeeId}" SelectedItem="{Binding  Employee}" ItemsSource="{Binding Path=DataContext.EmployeesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">

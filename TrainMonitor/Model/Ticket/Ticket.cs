@@ -27,6 +27,16 @@ namespace TrainMonitor.Model.Ticket
                 OnPropertyChanged();
             }
         }
+        private DateTime _date_of_return;
+        public DateTime DateOfReturn
+        {
+            get => _date_of_return;
+            set
+            {
+                _date_of_return = value;
+                OnPropertyChanged();
+            }
+        }
         private DateTime _booking_date;
         public DateTime BookingDate
         {

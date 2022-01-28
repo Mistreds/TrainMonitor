@@ -33,6 +33,7 @@ namespace TrainMonitor.Model.Train
                 train.Brigade = null;
             }
             db.UpdateRange(trains);
+            db.RemoveRange(db.Train.Where(p => !trains.Select(s => s.ID_Train).Contains(p.ID_Train)));
             db.SaveChanges();
         }
         public void UpdateTrain_Maintance(ObservableCollection<Train_Maintance> trains)
@@ -43,12 +44,14 @@ namespace TrainMonitor.Model.Train
                 train.TrainWorkType= null;
             }
             db.UpdateRange(trains);
+            db.RemoveRange(db.TrainMaintance.Where(p => !trains.Select(s => s.ID_Train_Maintance).Contains(p.ID_Train_Maintance)));
             db.SaveChanges();
         }
         public void UpdateWorkType(ObservableCollection<TrainWorkType> trains)
         {
             var db = new ConnectDB();
             db.UpdateRange(trains);
+            db.RemoveRange(db.TrainWorkTypes.Where(p => !trains.Select(s => s.IdType).Contains(p.IdType)));
             db.SaveChanges();
         }
     }

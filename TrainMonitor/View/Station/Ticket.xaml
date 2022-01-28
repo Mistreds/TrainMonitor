@@ -8,9 +8,12 @@
       xmlns:ViewModel="clr-namespace:TrainMonitor.ViewModel.Route"
                d:DataContext="{d:DesignInstance Type=ViewModel:RouteViewModel}"
       Background="White"
+      xmlns:conv="clr-namespace:TrainMonitor.Model"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Ticket">
-
+    <Page.Resources>
+        <conv:DateTimeConvert x:Key="Conv"></conv:DateTimeConvert>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -21,7 +24,7 @@
                 <DataGridTemplateColumn Header="Дата покупки">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding DateOfPurchase, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <TextBlock Text="{Binding DateOfPurchase, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Conv}}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
@@ -33,12 +36,24 @@
                 <DataGridTemplateColumn Header="Дата брони">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding BookingDate, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <TextBlock Text="{Binding BookingDate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Conv}}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding BookingDate, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Дата возвращения">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateOfReturn, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Conv}}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateOfReturn, UpdateSourceTrigger=PropertyChanged}"></DatePicker>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>

@@ -35,12 +35,12 @@ namespace TrainMonitor.Model.Employee
         public ObservableCollection<Model.Employee.Employee> GetEmployee()
         {
             var db = new ConnectDB();
-            return new ObservableCollection<Employee>(db.Employee.Include(p=>p.Brigade).Include(p=>p.EmployeePost).ThenInclude(p=>p.Post));
+            return new ObservableCollection<Employee>(db.Employee.Include(p=>p.EmployeeBrigade).ThenInclude(p=>p.Brigade).Include(p=>p.EmployeePost).ThenInclude(p=>p.Post));
         }
         public ObservableCollection<Model.Employee.Brigade> GetBrigades()
         {
             var db = new ConnectDB();
-            return new ObservableCollection<Brigade>(db.Brigade.Where(p=>p.ID_Brigade!=1));
+            return new ObservableCollection<Brigade>(db.Brigade.Include(p=>p.Employee));
 
         }
         public List<Model.Employee.Role> GetRole()
@@ -65,7 +65,7 @@ namespace TrainMonitor.Model.Employee
         {
             var db = new ConnectDB();
             db.Brigade.UpdateRange(brigades);
-            db.Brigade.RemoveRange(db.Brigade.Where(p => !brigades.Select(s => s.ID_Brigade).Contains(p.ID_Brigade) && p.ID_Brigade!=1));
+            db.Brigade.RemoveRange(db.Brigade.Where(p => !brigades.Select(s => s.ID_Brigade).Contains(p.ID_Brigade)));
             db.SaveChanges();
         }
         public void UpdateEmployee(ObservableCollection<Employee> employee)
@@ -78,11 +78,16 @@ namespace TrainMonitor.Model.Employee
                 {
                     post.Post = null;//необходимо присвоить в employeepost переменной post null, потому что ef core будет пытатся добавить его в бд, и будет выскакивать исключение, что повторяющийся ключ
                 }
+                foreach(var brig in emp.EmployeeBrigade)
+                {
+                   brig.Brigade = null;//необходимо присвоить в employeepost переменной post null, потому что ef core будет пытатся добавить его в бд, и будет выскакивать исключение, что повторяющийся ключ
+                }
                 if (!emp.Valid_Phone)//если телефон не правильного формата то оставляет его пустым
                     emp.Phone = string.Empty;
-                emp.Brigade = null; //аналогично с employee post
+                db.RemoveRange(db.EmployeeBrigade.Where(p => !emp.EmployeeBrigade.Select(s => s.ID_EmployeeBrigade).Contains(p.ID_EmployeeBrigade) && p.EmployeeId == emp.ID_Employee));
                 if (emp.ID_Employee==1)//это чтобы не удалили случайно права администратору
                     continue;
+
                 db.RemoveRange(db.EmployeePost.Where(p => !emp.EmployeePost.Select(s => s.ID_EmployeePost).Contains(p.ID_EmployeePost) && p.EmployeeId==emp.ID_Employee));//удаление должностей, которые мы вручную удалили из коллекции через del
                 
             }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrainMonitor.Model.Employee;
+using TrainMonitor.Model.Route;
 using TrainMonitor.Model.Train;
 
 namespace TrainMonitor.Model
@@ -29,7 +30,8 @@ namespace TrainMonitor.Model
         public DbSet<Route.Route> Route { get; set; }
         public DbSet<Schedule.Schedule> Schedule { get; set; }
         public DbSet<Ticket.Ticket> Ticket { get; set; }
-
+        public DbSet<Model.Employee.EmployeeBrigade> EmployeeBrigade{ get; set; }
+        public DbSet<Route.RouteStation> RouteStation{ get; set; }
         public ConnectDB()
         {
             //Database.EnsureDeleted();
@@ -71,11 +73,9 @@ namespace TrainMonitor.Model
             #region Brigade
             modelBuilder.Entity<Employee.Brigade>(b => b.ToTable("brigade"));
             modelBuilder.Entity<Employee.Brigade>().Property(f => f.ID_Brigade).UseIdentityAlwaysColumn();
-            modelBuilder.Entity<Employee.Brigade>().HasData(new Brigade(1, "Пусто"));
-            modelBuilder.Entity<Employee.Brigade>().Property(f => f.ID_Brigade).HasIdentityOptions(startValue: 2);
             #endregion
             modelBuilder.Entity<Employee.Employee>(b => b.ToTable("employee"));
-            modelBuilder.Entity<Employee.Employee>().Property(p => p.BrigadeId).HasDefaultValue(1);
+           
             #region Employee
             modelBuilder.Entity<Employee.Employee>().Property(f => f.ID_Employee).UseIdentityAlwaysColumn();
             modelBuilder.Entity<Employee.Employee>().Property(f => f.ID_Employee).HasIdentityOptions(startValue: 2);
@@ -87,6 +87,14 @@ namespace TrainMonitor.Model
             modelBuilder.Entity<EmployeePost>().HasData(new EmployeePost[] { new EmployeePost(1,1,1) });
             modelBuilder.Entity<EmployeePost>().Property(f => f.ID_EmployeePost).UseIdentityAlwaysColumn();
             modelBuilder.Entity<EmployeePost>().Property(f => f.ID_EmployeePost).HasIdentityOptions(startValue: 2);
+            #endregion
+            #region  EmployeeBrigade
+            modelBuilder.Entity<EmployeeBrigade>(b => b.ToTable("reference_table_brigade"));
+            modelBuilder.Entity<EmployeeBrigade>().Property(p => p.ID_EmployeeBrigade).UseIdentityAlwaysColumn();
+            #endregion
+            #region  RouteStation
+            modelBuilder.Entity<RouteStation>(b => b.ToTable("reference_table_route"));
+            modelBuilder.Entity<RouteStation>().Property(b => b.ID_RouteStation).UseIdentityAlwaysColumn();
             #endregion
             modelBuilder.Entity<MedicalExamination>(b => b.ToTable("medical_examination"));
             #endregion

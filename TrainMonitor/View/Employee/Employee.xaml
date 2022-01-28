@@ -63,15 +63,30 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Бригада" >
+                <DataGridTemplateColumn Header="Бригады" Width="150" x:Name="BrigColumn" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Brigade.BrigadeName,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                            <ListBox  ItemsSource="{Binding EmployeeBrigade}" DisplayMemberPath="Brigade.BrigadeName"></ListBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <ComboBox SelectedValuePath="ID_Brigade" DisplayMemberPath="BrigadeName" SelectedValue="{Binding BrigadeId}" SelectedItem="{Binding  Brigade}" ItemsSource="{Binding Path=DataContext.BrigadesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                            <DataGrid  Width="{Binding ElementName=BrigColumn, Path=ActualWidth}"  HeadersVisibility="None" AutoGenerateColumns="False" ItemsSource="{Binding EmployeeBrigade}">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="1*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Brigade.BrigadeName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                        <DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <ComboBox SelectedValuePath="ID_Brigade" DisplayMemberPath="BrigadeName" SelectedValue="{Binding BrigadeId}" SelectedItem="{Binding  Brigade}" ItemsSource="{Binding Path=DataContext.BrigadesCombo,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>

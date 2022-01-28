@@ -172,6 +172,7 @@
     </Compile>
     <Compile Include="Migrations\ConnectDBModelSnapshot.cs" />
     <Compile Include="Model\ConnectDB.cs" />
+    <Compile Include="Model\Convert.cs" />
     <Compile Include="Model\Employee\Employee.cs" />
     <Compile Include="Model\Employee\EmployeeModel.cs" />
     <Compile Include="Model\Employee\EmployeeRegistrationModel.cs" />
